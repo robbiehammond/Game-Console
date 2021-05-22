@@ -1,0 +1,8 @@
+.pio
+CMakeListsPrivate.txt
+cmake-build-*/
+README*
+.DS_Store
+.idea
+Schematics/Schematics.pro
+
