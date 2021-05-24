@@ -3,8 +3,12 @@
 
 
 #include <Objects/Entity.h>
-#include <Render/Screen.h>
 #include "SPI.h"
+
+enum GameType {
+    TOP_DOWN_GRID,
+    FALLING_PHYSICS
+};
 
 class PhysicsHandler {
 public:
@@ -17,10 +21,14 @@ public:
     PhysicsHandler(PhysicsHandler&) = delete;
     void operator=(PhysicsHandler const&) = delete;
 
-    static void initialize(Screen& s);
-    static void update(Entity* objects[], int len);
+    static void initialize(Adafruit_ST7735* s);
+    static void update(Entity* objects[], int len, GameType type);
     static void reset(Entity* objects[], int len);
-    Screen* getScreen() { return screen; }
+    Adafruit_ST7735* getScreen() { return screen; }
+
+
+    static bool toggleGravity;
+    static bool toggleBouncyWalls;
 
 
 
@@ -29,10 +37,17 @@ private:
 
     static int screenHeight;
     static int screenWidth;
-    static Screen* screen;
+    static Adafruit_ST7735* screen;
     static bool screenInitialized;
 
-    static void moveObject(Entity* e);
+    //different types of physics updates
+    static void fallingPhysicsUpdate(Entity* objects[], int len);
+
+
+    //different types of effects, some may be specialized.
+    static void applyBouncyWallsEffect(Entity* obj);
+
+
 };
 
 

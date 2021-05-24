@@ -5,11 +5,13 @@
 
 class Rect : public Entity {
 public:
-    Rect(uint16_t color, float length, float width);
-    void setCenterPos(float x, float y) override;
+    Rect(uint16_t color, float height, float width);
+    void render(Adafruit_ST7735 *screen) override;
+    void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) override;
+    void clearImage(Adafruit_ST7735* screen) override;
 
 private:
-    float length;
+    float height;
     float width;
 };
 

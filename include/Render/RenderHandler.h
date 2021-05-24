@@ -6,8 +6,8 @@
 #define GAME_CONSOLE_RENDERHANDLER_H
 
 #include <Objects/Entity.h>
-#include "Screen.h"
 
+//Screen is 128x128
 class RenderHandler {
 public:
     //singleton setup
@@ -19,20 +19,19 @@ public:
     RenderHandler(RenderHandler&) = delete;
     void operator=(RenderHandler const&) = delete;
 
-    static void initialize(Screen& s);
+    static void initialize(Adafruit_ST7735* s);
     static void update(Entity* objects[], int len);
     static void reset(Entity* objects[], int len);
-    Screen* getScreen() { return screen; }
+    Adafruit_ST7735* getScreen() { return screen; }
 
 private:
     RenderHandler() {};
-    static void renderCircle();
-    static void renderRectangle();
+    static void render(Entity* e);
 
 
-    static Screen* screen;
-    static int screenHeight;
-    static int screenWidth;
+    static Adafruit_ST7735* screen;
+    static unsigned char screenHeight;
+    static unsigned char screenWidth;
 
 
 

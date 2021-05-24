@@ -4,11 +4,27 @@
 
 #include "Objects/Entity.h"
 
-Entity::Entity(uint16_t color) : color(color) {
+Entity::Entity(uint16_t color, Tag tag)
+    : color(color), OOBBottom(false), OOBTop(false), OOBRight(false), OOBLeft(false) {
+
+}
+
+void Entity::setOriginPos(Vec2D vec) {
+    originPos = vec;
+}
+
+void Entity::setOriginPos(float x, float y) {
+    originPos.x = x;
+    originPos.y = y;
 
 }
 
 void Entity::setVelocity(float x, float y) {
-    velocity = vec2D(x, y);
+    velocity.x = x;
+    velocity.y = y;
+}
 
+
+void Entity::setVelocity(Vec2D vec) {
+    velocity = vec;
 }

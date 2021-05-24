@@ -4,12 +4,23 @@
 
 #include "Objects/Rect.h"
 
-Rect::Rect(uint16_t color, float length, float width)
-    : Entity(color), length(length), width(width) {
-    setCenterPos(0,0);
+Rect::Rect(uint16_t color, float height, float width)
+    : Entity(color, RECTANGLE), height(height), width(width) {
+    setOriginPos(0, 0);
 }
 
-void Rect::setCenterPos(float x, float y) {
-    centerPos.x = x;
-    centerPos.y = y;
+void Rect::render(Adafruit_ST7735 *screen) {
+    screen->drawRect(originPos.x, originPos.y, width, height, color);
+}
+
+void Rect::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {
+    OOBTop = originPos.y + .5 * height > screenHeight;
+    OOBBottom = originPos.y - .5 * height < 0;
+    OOBRight = originPos.x + width > screenWidth;
+    OOBLeft = originPos.x < 0;
+}
+
+void Rect::clearImage(Adafruit_ST7735 *screen) {
+    //TODO
+
 }

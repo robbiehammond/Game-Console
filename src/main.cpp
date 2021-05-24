@@ -1,65 +1,90 @@
-#include <EEPROM.h>
 #include <Render/RenderHandler.h>
-#include "SPI.h"
 #include "Objects/Circle.h"
-#include "Render/Screen.h"
+#include "Objects/Rect.h"
 #include "Physics/PhysicsHandler.h"
+#include "Games/Game.h"
 
 #define TFT_CS        10
 #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
 #define TFT_DC         8
 
 
-/*
- * On every loop,
- * Create any new entities
- * Accept input with IO
- * Update positions with physics
- * Render new stuff
- * Repeat indefinitely
+/*TODO
+ * 1.) Abstract rendering and physics so that only one loop through entities needs to run, rather than 2.
+ *      - This means update position, then render immediately after for entities[i].
+ *
  */
 
+
+/*
+ * -- Game writing Caveats --
+ *  1.) Be cautious of using dynamic allocation. Though it'll be fine for constantly creating/deleting
+ *  objects of the same size (ex: creating a rect and deleting a rect over and over again), The heap can become
+ *  fragmented if you're careless, thus running out of availible memory after a while of gameplay.
+ *
+ */
+
+
+
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-const int MAX_ENTITIES = 100;
+const int MAX_ENTITIES = 20; //max number of entities on the screen at once
 Entity* entities[MAX_ENTITIES];
+Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
 //testing devices
-Circle c(ST7735_MAGENTA, 1);
-Screen s(5, 5);
-
+Rect c(ST77XX_MAGENTA, 15,30);
 
 
 
 float p = 3.1415926;
-void testlines(uint16_t color);
-void testdrawtext(char *text, uint16_t color);
-void testfastlines(uint16_t color1, uint16_t color2);
-void testdrawrects(uint16_t color);
-void testfillrects(uint16_t color1, uint16_t color2);
-void testfillcircles(uint8_t radius, uint16_t color);
-void testtriangles();
-void testroundrects();
-void tftPrintTest();
-void mediabuttons();
-void testdrawcircles(uint8_t radius, uint16_t color);
-
-
-
+void startUpGame(Game* game);
+void onLoop(Game* game);
+//void testlines(uint16_t color);
+//void testdrawtext(char *text, uint16_t color);
+//void testfastlines(uint16_t color1, uint16_t color2);
+//void testdrawrects(uint16_t color);
+//void testfillrects(uint16_t color1, uint16_t color2);
+//void testfillcircles(uint8_t radius, uint16_t color);
+//void testtriangles();
+//void testroundrects();
+//void tftPrintTest();
+//void mediabuttons();
+//void testdrawcircles(uint8_t radius, uint16_t color);
 
 
 void setup(void) {
+    //hardware setup
     Serial.begin(9600);
     Serial.print("Initializing...");
     tft.initR(INITR_144GREENTAB);
     tft.fillScreen(ST77XX_BLACK);
+
+
+    //software setup
     delay(1000);
-    PhysicsHandler::initialize(s);
-    RenderHandler::initialize(s);
+    PhysicsHandler::initialize(&tft);
+    RenderHandler::initialize(&tft);
+    PhysicsHandler::toggleBouncyWalls = true;
+
+    //for (int i = 0; i < 5; i++) {
+    //    entities[i] = new Circle(ST7735_ORANGE, random(1,4));
+    //    entities[i]->setOriginPos(random(0,20), random(0,20));
+    //    entities[i]->setVelocity(random(0,100)/(double)100, random(0,100)/(double)100);
+    //}
+
+    //testing stuff
     entities[0] = &c;
+    c.setOriginPos(30, 15);
+    c.setVelocity(1, 3);
+
+    //entities[1] = &d;
+    //d.setOriginPos(5,5);
+    //d.setVelocity(1,.7);
 }
 
 void loop() {
-    PhysicsHandler::update(entities, MAX_ENTITIES);
+    Serial.println(entities[0]->getVelocity());
+    PhysicsHandler::update(entities, MAX_ENTITIES, FALLING_PHYSICS);
     RenderHandler::update(entities, MAX_ENTITIES);
 }
 //

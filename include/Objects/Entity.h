@@ -3,14 +3,16 @@
 #include "../../lib/Adafruit_ST7735.h"
 
 //for vel and pos
-class vec2D : public Printable {
+class Vec2D : public Printable {
 public:
     float x;
     float y;
-    vec2D() { x = 0; y = 0;}
-    vec2D(float x, float y) { this->x = x; this->y = y; }
+    Vec2D() { x = 0; y = 0;}
+    Vec2D(float x, float y) { this->x = x; this->y = y; }
 
-
+    Vec2D operator+(const Vec2D& b) const {
+        return {this->x + b.x, this->y + b.y};
+    }
     size_t printTo (Print& p) const override {
         p.print("(");
         p.print(x);
@@ -21,18 +23,41 @@ public:
     }
 };
 
+//Valid objects that we know how to display
+enum Tag {
+    CIRCLE,
+    RECTANGLE,
+    TRIANGLE
+};
+
 class Entity {
 public:
-    explicit Entity(uint16_t color);
-    vec2D getCenterPos() const { return centerPos; };
-    virtual void setCenterPos(float x, float y) = 0; //the notion of "center" isn't so easy to define
+    explicit Entity(uint16_t color, Tag tag);
+
+    Vec2D getOriginPos() const { return originPos; };
+    void setOriginPos(float x, float y);
+    void setOriginPos(Vec2D vec);
+
+    Vec2D getVelocity() const { return velocity; }
     void setVelocity(float x, float y);
+    void setVelocity(Vec2D vec);
+
     uint16_t getColor() const { return color; };
+    bool isOOBTop() {return OOBTop; }
+    bool isOOBBottom() {return OOBBottom;}
+    bool isOOBRight() { return OOBRight; }
+    bool isOOBLeft() { return OOBLeft; }
+
+
+    virtual void render(Adafruit_ST7735 *screen) = 0;
+    virtual void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) = 0; //no need to take lots of space
+    virtual void clearImage(Adafruit_ST7735* screen) = 0;
+
 
 protected:
-    float verticalLength;
-    vec2D centerPos;
-    vec2D velocity;
+    bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
+    Vec2D originPos;
+    Vec2D velocity;
     uint16_t color = ST77XX_BLACK;
 };
 #endif
