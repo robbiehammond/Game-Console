@@ -8,7 +8,10 @@ Circle::Circle(uint16_t color, float radius)
 }
 
 void Circle::render(Adafruit_ST7735 *screen) {
-    screen->drawCircle(originPos.x, originPos.y, radius, color);
+    if (filled)
+        screen->fillCircle(originPos.x, originPos.y, radius, color);
+    else
+        screen->drawCircle(originPos.x, originPos.y, radius, color);
 }
 
 void Circle::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {
@@ -18,7 +21,3 @@ void Circle::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) 
     OOBLeft = originPos.x - radius < 0;
 }
 
-//probably should send this in with the color too.
-void Circle::clearImage(Adafruit_ST7735 *screen) {
-    screen->drawCircle(originPos.x, originPos.y, radius, ST77XX_BLACK);
-}

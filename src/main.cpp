@@ -1,7 +1,6 @@
-#include <Render/RenderHandler.h>
 #include "Objects/Circle.h"
 #include "Objects/Rect.h"
-#include "Physics/PhysicsHandler.h"
+#include <Engine/RealEngine.h>
 #include "Games/Game.h"
 
 #define TFT_CS        10
@@ -56,26 +55,26 @@ void setup(void) {
     //hardware setup
     Serial.begin(9600);
     Serial.print("Initializing...");
+
+
+    //screen setup
     tft.initR(INITR_144GREENTAB);
     tft.fillScreen(ST77XX_BLACK);
+
+    //software setup
+    RealEngine::initialize(&tft);
+    PhysicsHandler::toggleBouncyWalls = true;
 
 
     //software setup
     delay(1000);
-    PhysicsHandler::initialize(&tft);
-    RenderHandler::initialize(&tft);
-    PhysicsHandler::toggleBouncyWalls = true;
 
-    //for (int i = 0; i < 5; i++) {
-    //    entities[i] = new Circle(ST7735_ORANGE, random(1,4));
-    //    entities[i]->setOriginPos(random(0,20), random(0,20));
-    //    entities[i]->setVelocity(random(0,100)/(double)100, random(0,100)/(double)100);
-    //}
+
 
     //testing stuff
     entities[0] = &c;
-    c.setOriginPos(30, 15);
-    c.setVelocity(1, 3);
+    c.setOriginPos(30, 30);
+    c.setVelocity(2, 2);
 
     //entities[1] = &d;
     //d.setOriginPos(5,5);
@@ -83,9 +82,7 @@ void setup(void) {
 }
 
 void loop() {
-    Serial.println(entities[0]->getVelocity());
-    PhysicsHandler::update(entities, MAX_ENTITIES, FALLING_PHYSICS);
-    RenderHandler::update(entities, MAX_ENTITIES);
+    RealEngine::update(entities, MAX_ENTITIES);
 }
 //
 //void testlines(uint16_t color) {

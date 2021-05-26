@@ -1,7 +1,3 @@
-//
-// Created by Robert Hammond on 5/22/21.
-//
-
 #ifndef GAME_CONSOLE_RENDERHANDLER_H
 #define GAME_CONSOLE_RENDERHANDLER_H
 
@@ -20,7 +16,7 @@ public:
     void operator=(RenderHandler const&) = delete;
 
     static void initialize(Adafruit_ST7735* s);
-    static void update(Entity* objects[], int len);
+    static void update(Entity* obj);
     static void reset(Entity* objects[], int len);
     Adafruit_ST7735* getScreen() { return screen; }
 
@@ -36,6 +32,4 @@ private:
 
 
 };
-
-
 #endif //GAME_CONSOLE_RENDERHANDLER_H

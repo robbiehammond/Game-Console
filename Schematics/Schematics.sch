@@ -1,4 +1,183 @@
-EESchema Schematic File Version 2
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_ATmega:atmega328p-pn U1
+U 1 1 60AF35DD
+P 5750 3750
+F 0 "U1" H 5725 4715 50  0000 C CNN
+F 1 "atmega328p-pn" H 5725 4624 50  0000 C CNN
+F 2 "" H 5100 5000 50  0001 C CNN
+F 3 "" H 5100 5000 50  0001 C CNN
+	1    5750 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR02
+U 1 1 60AF5973
+P 7350 2200
+F 0 "#PWR02" H 7350 2050 50  0001 C CNN
+F 1 "+5V" H 7365 2373 50  0000 C CNN
+F 2 "" H 7350 2200 50  0001 C CNN
+F 3 "" H 7350 2200 50  0001 C CNN
+	1    7350 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR01
+U 1 1 60AF7456
+P 7050 2200
+F 0 "#PWR01" H 7050 1950 50  0001 C CNN
+F 1 "GND" H 7055 2027 50  0000 C CNN
+F 2 "" H 7050 2200 50  0001 C CNN
+F 3 "" H 7050 2200 50  0001 C CNN
+	1    7050 2200
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7050 2200 7050 2300
+Wire Wire Line
+	7050 3650 6200 3650
+Wire Wire Line
+	7350 2200 7350 2250
+Wire Wire Line
+	7350 3850 6200 3850
+$Comp
+L Device:C C3
+U 1 1 60AF8EEC
+P 7200 2450
+F 0 "C3" V 7452 2450 50  0000 C CNN
+F 1 "C" V 7361 2450 50  0000 C CNN
+F 2 "" H 7238 2300 50  0001 C CNN
+F 3 "~" H 7200 2450 50  0001 C CNN
+	1    7200 2450
+	0    -1   -1   0   
+$EndComp
+Connection ~ 7050 2450
+Wire Wire Line
+	7050 2450 7050 3650
+Connection ~ 7350 2450
+Wire Wire Line
+	7350 2450 7350 3850
+Wire Wire Line
+	7350 2250 7750 2250
+Wire Wire Line
+	7750 2250 7750 1600
+Wire Wire Line
+	7750 1600 4800 1600
+Wire Wire Line
+	4800 3650 5300 3650
+Connection ~ 7350 2250
+Wire Wire Line
+	7350 2250 7350 2450
+Wire Wire Line
+	7050 2300 5100 2300
+Wire Wire Line
+	5100 3750 5300 3750
+Connection ~ 7050 2300
+Wire Wire Line
+	7050 2300 7050 2450
+Wire Wire Line
+	5100 2300 5100 3750
+Wire Wire Line
+	4800 1600 4800 3050
+$Comp
+L Device:R R1
+U 1 1 60AFC302
+P 5150 3050
+F 0 "R1" V 4943 3050 50  0000 C CNN
+F 1 "R" V 5034 3050 50  0000 C CNN
+F 2 "" V 5080 3050 50  0001 C CNN
+F 3 "~" H 5150 3050 50  0001 C CNN
+	1    5150 3050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5000 3050 4800 3050
+Connection ~ 4800 3050
+Wire Wire Line
+	4800 3050 4800 3650
+$Comp
+L Device:Crystal Y1
+U 1 1 60B0038E
+P 4750 4150
+F 0 "Y1" V 4704 4281 50  0000 L CNN
+F 1 "Crystal" V 4795 4281 50  0000 L CNN
+F 2 "" H 4750 4150 50  0001 C CNN
+F 3 "~" H 4750 4150 50  0001 C CNN
+	1    4750 4150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 60B016A9
+P 3900 4050
+F 0 "C1" V 3648 4050 50  0000 C CNN
+F 1 "C" V 3739 4050 50  0000 C CNN
+F 2 "" H 3938 3900 50  0001 C CNN
+F 3 "~" H 3900 4050 50  0001 C CNN
+	1    3900 4050
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 60B0214C
+P 3900 4350
+F 0 "C2" V 3648 4350 50  0000 C CNN
+F 1 "C" V 3739 4350 50  0000 C CNN
+F 2 "" H 3938 4200 50  0001 C CNN
+F 3 "~" H 3900 4350 50  0001 C CNN
+	1    3900 4350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5100 3750 3300 3750
+Wire Wire Line
+	3300 3750 3300 4200
+Wire Wire Line
+	3300 4200 3500 4200
+Wire Wire Line
+	3500 4200 3500 4050
+Wire Wire Line
+	3500 4050 3750 4050
+Connection ~ 5100 3750
+Wire Wire Line
+	4050 4050 4400 4050
+Wire Wire Line
+	4400 4050 4400 4000
+Wire Wire Line
+	4400 4000 4750 4000
+Wire Wire Line
+	4750 4000 4750 3850
+Wire Wire Line
+	4750 3850 5300 3850
+Connection ~ 4750 4000
+Wire Wire Line
+	4050 4350 4750 4350
+Wire Wire Line
+	4750 4350 4750 4300
+Wire Wire Line
+	4750 4300 5150 4300
+Wire Wire Line
+	5150 4300 5150 3950
+Wire Wire Line
+	5150 3950 5300 3950
+Connection ~ 4750 4300
+Wire Wire Line
+	3500 4200 3500 4350
+Wire Wire Line
+	3500 4350 3750 4350
+Connection ~ 3500 4200
 $EndSCHEMATC

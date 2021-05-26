@@ -22,7 +22,7 @@ public:
     void operator=(PhysicsHandler const&) = delete;
 
     static void initialize(Adafruit_ST7735* s);
-    static void update(Entity* objects[], int len, GameType type);
+    static void update(Entity *obj, GameType type);
     static void reset(Entity* objects[], int len);
     Adafruit_ST7735* getScreen() { return screen; }
 
@@ -41,7 +41,7 @@ private:
     static bool screenInitialized;
 
     //different types of physics updates
-    static void fallingPhysicsUpdate(Entity* objects[], int len);
+    static void fallingPhysicsUpdate(Entity* curObj);
 
 
     //different types of effects, some may be specialized.

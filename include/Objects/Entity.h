@@ -23,7 +23,7 @@ public:
     }
 };
 
-//Valid objects that we know how to display
+//Valid objects that the engine knows how to display
 enum Tag {
     CIRCLE,
     RECTANGLE,
@@ -42,6 +42,11 @@ public:
     void setVelocity(float x, float y);
     void setVelocity(Vec2D vec);
 
+    bool isFilled() { return filled; };
+    void setFilled(bool fill) { filled = fill; };
+
+
+
     uint16_t getColor() const { return color; };
     bool isOOBTop() {return OOBTop; }
     bool isOOBBottom() {return OOBBottom;}
@@ -51,11 +56,11 @@ public:
 
     virtual void render(Adafruit_ST7735 *screen) = 0;
     virtual void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) = 0; //no need to take lots of space
-    virtual void clearImage(Adafruit_ST7735* screen) = 0;
 
 
 protected:
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
+    bool filled;
     Vec2D originPos;
     Vec2D velocity;
     uint16_t color = ST77XX_BLACK;

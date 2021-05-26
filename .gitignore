@@ -5,4 +5,6 @@ README*
 .DS_Store
 .idea
 Schematics/Schematics.pro
+Schematics/Schematics.sch-bak
+Schematics/Schematics-cache.lib
 

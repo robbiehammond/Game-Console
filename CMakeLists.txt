@@ -32,4 +32,4 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-add_executable(Z_DUMMY_TARGET ${SRC_LIST} src/Circle.cpp include/Objects/Circle.h src/Entity.cpp include/Objects/Entity.h src/Rect.cpp include/Objects/Rect.h src/PhysicsHandler.cpp include/Physics/PhysicsHandler.h src/RenderHandler.cpp include/Render/RenderHandler.h include/Games/Game.cpp include/Games/Game.h)
+add_executable(Z_DUMMY_TARGET ${SRC_LIST} src/Circle.cpp include/Objects/Circle.h src/Entity.cpp include/Objects/Entity.h src/Rect.cpp include/Objects/Rect.h src/PhysicsHandler.cpp include/Engine/Physics/PhysicsHandler.h src/RenderHandler.cpp include/Engine/Render/RenderHandler.h src/Game.cpp include/Games/Game.h src/RealEngine.cpp include/Engine/RealEngine.h src/IO.cpp include/Engine/IO/IO.h)
