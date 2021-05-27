@@ -9,8 +9,11 @@
 
 
 /*TODO
- * 1.) Abstract rendering and physics so that only one loop through entities needs to run, rather than 2.
- *      - This means update position, then render immediately after for entities[i].
+ * 1.) Get fully functional IO
+ * 2.) Re-organize Code (folder for src (main and possibly game studio startup), Engine (Render, Physics
+ *     IO), Games (self explanatory), Docs (self explanatory), Game Studio (pygame wrapper for testing?),
+ *     Schematics.
+ *
  *
  */
 
@@ -31,7 +34,7 @@ Entity* entities[MAX_ENTITIES];
 Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
 //testing devices
-Rect c(ST77XX_MAGENTA, 15,30);
+Rect c(ST77XX_MAGENTA, 15, 30);
 
 
 
@@ -55,6 +58,8 @@ void setup(void) {
     //hardware setup
     Serial.begin(9600);
     Serial.print("Initializing...");
+    pinMode(2, INPUT);
+    pinMode(3, INPUT);
 
 
     //screen setup
@@ -75,6 +80,7 @@ void setup(void) {
     entities[0] = &c;
     c.setOriginPos(30, 30);
     c.setVelocity(2, 2);
+    //c.enableControllable();
 
     //entities[1] = &d;
     //d.setOriginPos(5,5);

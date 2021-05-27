@@ -34,14 +34,22 @@ void PhysicsHandler::fallingPhysicsUpdate(Entity* curObj) {
     //curObj->clearImage(screen);
     curObj->boundsCheck(screenHeight, screenWidth);
 
+    if (curObj->controllable()) {
+        move(curObj);
+    }
+
     //apply effects
     if (toggleBouncyWalls) {
         applyBouncyWallsEffect(curObj);
     }
 
+    if (toggleGravity) {
+        applyGravityEffect(curObj);
+    }
+
     //update the position
     curObj->setOriginPos(curObj->getOriginPos() + curObj->getVelocity());
-    Serial.println(curObj->getOriginPos());
+    //Serial.println(curObj->getOriginPos());
 }
 
 void PhysicsHandler::applyBouncyWallsEffect(Entity* obj) {
@@ -51,11 +59,16 @@ void PhysicsHandler::applyBouncyWallsEffect(Entity* obj) {
             //if it top or bottom of screen, flip y direction
             obj->setVelocity(obj->getVelocity().x, obj->getVelocity().y * -1);
         }
+
         if (obj->isOOBRight() || obj->isOOBLeft()) {
             obj->setVelocity(obj->getVelocity().x * -1, obj->getVelocity().y);
         }
 }
 
+void PhysicsHandler::applyGravityEffect(Entity *obj) {
 
+}
 
+void PhysicsHandler::move(Entity *obj) {
 
+}

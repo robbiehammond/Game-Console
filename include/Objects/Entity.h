@@ -45,7 +45,9 @@ public:
     bool isFilled() { return filled; };
     void setFilled(bool fill) { filled = fill; };
 
-
+    void enableControllable() { controlled = true; };
+    void disableControllable() { controlled = false; };
+    bool controllable() { return controlled; };
 
     uint16_t getColor() const { return color; };
     bool isOOBTop() {return OOBTop; }
@@ -59,6 +61,7 @@ public:
 
 
 protected:
+    bool controlled = false;
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
     bool filled;
     Vec2D originPos;

@@ -3,6 +3,7 @@
 
 #include <Engine/Physics/PhysicsHandler.h>
 #include <Engine/Render/RenderHandler.h>
+#include <Engine/IO/IO.h>
 
 
 class RealEngine {

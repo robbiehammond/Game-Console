@@ -3,6 +3,7 @@
 
 
 #include <Objects/Entity.h>
+#include <Engine/IO/IO.h>
 #include "SPI.h"
 
 enum GameType {
@@ -32,6 +33,7 @@ public:
 
 
 
+
 private:
     PhysicsHandler() {};
 
@@ -43,12 +45,16 @@ private:
     //different types of physics updates
     static void fallingPhysicsUpdate(Entity* curObj);
 
+    static void move(Entity* obj);
+
 
     //different types of effects, some may be specialized.
     static void applyBouncyWallsEffect(Entity* obj);
+    static void applyGravityEffect(Entity* obj);
+
+    //friction for floored objects
+
 
 
 };
-
-
 #endif //GAME_CONSOLE_PHYSICSHANDLER_H

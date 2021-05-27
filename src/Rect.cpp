@@ -20,4 +20,5 @@ void Rect::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {
     OOBTop = originPos.y + .5 * height > screenHeight;
     OOBBottom = originPos.y - .5 * height < 0;
     OOBRight = originPos.x + width > screenWidth;
+    OOBLeft = originPos.x < 0;
 }
