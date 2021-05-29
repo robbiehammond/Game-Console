@@ -1,4 +1,4 @@
-#include "Engine/Physics/PhysicsHandler.h"
+#include "PhysicsHandler.h"
 Adafruit_ST7735* PhysicsHandler::screen = nullptr;
 bool PhysicsHandler::screenInitialized = false;
 int PhysicsHandler::screenHeight = 0;
@@ -34,7 +34,7 @@ void PhysicsHandler::fallingPhysicsUpdate(Entity* curObj) {
     //curObj->clearImage(screen);
     curObj->boundsCheck(screenHeight, screenWidth);
 
-    if (curObj->controllable()) {
+    if (curObj->isPlayer()) {
         move(curObj);
     }
 
@@ -70,5 +70,8 @@ void PhysicsHandler::applyGravityEffect(Entity *obj) {
 }
 
 void PhysicsHandler::move(Entity *obj) {
-
+    if (IO::leftPressed()) obj->setOriginPos(obj->getOriginPos().x - 1, obj->getOriginPos().y);
+    if (IO::upPressed()) obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y - 1);
+    if (IO::rightPressed()) obj->setOriginPos(obj->getOriginPos().x + 1, obj->getOriginPos().y);
+    if (IO::downPressed()) obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y + 1);
 }

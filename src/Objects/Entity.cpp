@@ -2,7 +2,7 @@
 // Created by Robert Hammond on 5/18/21.
 //
 
-#include "Objects/Entity.h"
+#include "Entity.h"
 
 Entity::Entity(uint16_t color, Tag tag)
     : color(color), OOBBottom(false), OOBTop(false), OOBRight(false), OOBLeft(false) {

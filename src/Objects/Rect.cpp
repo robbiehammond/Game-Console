@@ -2,7 +2,7 @@
 // Created by Robert Hammond on 5/21/21.
 //
 
-#include "Objects/Rect.h"
+#include "Rect.h"
 
 Rect::Rect(uint16_t color, float height, float width)
     : Entity(color, RECTANGLE), height(height), width(width) {

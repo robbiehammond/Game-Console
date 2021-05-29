@@ -1,7 +1,7 @@
 #ifndef GAME_CONSOLE_RENDERHANDLER_H
 #define GAME_CONSOLE_RENDERHANDLER_H
 
-#include <Objects/Entity.h>
+#include "Objects/Entity.h"
 
 //Screen is 128x128
 class RenderHandler {
@@ -23,8 +23,6 @@ public:
 private:
     RenderHandler() {};
     static void render(Entity* e);
-
-
     static Adafruit_ST7735* screen;
     static unsigned char screenHeight;
     static unsigned char screenWidth;

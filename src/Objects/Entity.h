@@ -1,6 +1,6 @@
 #ifndef GAME_CONSOLE_ENTITY_H
 #define GAME_CONSOLE_ENTITY_H
-#include "../../lib/Adafruit_ST7735.h"
+#include "Adafruit_ST7735.h"
 
 //for vel and pos
 class Vec2D : public Printable {
@@ -45,9 +45,9 @@ public:
     bool isFilled() { return filled; };
     void setFilled(bool fill) { filled = fill; };
 
-    void enableControllable() { controlled = true; };
-    void disableControllable() { controlled = false; };
-    bool controllable() { return controlled; };
+    void makePlayer() { enableControllable(); };
+    bool isPlayer() { return controlled; };
+
 
     uint16_t getColor() const { return color; };
     bool isOOBTop() {return OOBTop; }
@@ -61,6 +61,11 @@ public:
 
 
 protected:
+    void enableControllable() { controlled = true; };
+    void disableControllable() { controlled = false; };
+    bool controllable() { return controlled; };
+
+
     bool controlled = false;
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
     bool filled;

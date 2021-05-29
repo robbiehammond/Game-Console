@@ -1,5 +1,5 @@
-#include <Objects/Circle.h>
-#include "Engine/Render/RenderHandler.h"
+#include "../../Objects/Circle.h"
+#include "RenderHandler.h"
 Adafruit_ST7735* RenderHandler::screen = nullptr;
 unsigned char RenderHandler::screenHeight = 0;
 unsigned char RenderHandler::screenWidth = 0;

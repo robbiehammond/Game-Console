@@ -1,6 +1,7 @@
 #include "Objects/Circle.h"
 #include "Objects/Rect.h"
-#include <Engine/RealEngine.h>
+#include "Objects/Triangle.h"
+#include "Engine/RealEngine.h"
 #include "Games/Game.h"
 
 #define TFT_CS        10
@@ -34,7 +35,7 @@ Entity* entities[MAX_ENTITIES];
 Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
 //testing devices
-Rect c(ST77XX_MAGENTA, 15, 30);
+Triangle c(ST77XX_MAGENTA, 10, 50);
 
 
 
@@ -78,9 +79,9 @@ void setup(void) {
 
     //testing stuff
     entities[0] = &c;
-    c.setOriginPos(30, 30);
-    c.setVelocity(2, 2);
-    //c.enableControllable();
+    c.setOriginPos(20, 20);
+    //c.setVelocity(2, 2);
+    c.makePlayer();
 
     //entities[1] = &d;
     //d.setOriginPos(5,5);
@@ -88,6 +89,7 @@ void setup(void) {
 }
 
 void loop() {
+    Serial.println(digitalRead(6));
     RealEngine::update(entities, MAX_ENTITIES);
 }
 //

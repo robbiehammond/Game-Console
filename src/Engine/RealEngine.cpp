@@ -1,4 +1,4 @@
-#include "Engine/RealEngine.h"
+#include "RealEngine.h"
 
 void RealEngine::update(Entity* objects[], int len) {
     for (int i = 0; i < len; i++) {
@@ -14,5 +14,6 @@ void RealEngine::update(Entity* objects[], int len) {
 void RealEngine::initialize(Adafruit_ST7735 *s) {
     PhysicsHandler::initialize(s);
     RenderHandler::initialize(s);
-    IO::initialize(5, 9, 2, 7, 0, 1);
+    //change these if input pins need to change
+    IO::initialize(2, 3, 9, 5, 0, 1, 0);
 }
