@@ -13,15 +13,6 @@ enum GameType {
 
 class PhysicsHandler {
 public:
-    //singleton setup
-    static PhysicsHandler& getInstance()
-    {
-        static PhysicsHandler instance;
-        return instance;
-    }
-    PhysicsHandler(PhysicsHandler&) = delete;
-    void operator=(PhysicsHandler const&) = delete;
-
     static void initialize(Adafruit_ST7735* s);
     static void update(Entity *obj, GameType type);
     static void reset(Entity* objects[], int len);

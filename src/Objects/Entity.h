@@ -30,6 +30,7 @@ enum Tag {
     TRIANGLE
 };
 
+//class for dynamic entities
 class Entity {
 public:
     explicit Entity(uint16_t color, Tag tag);

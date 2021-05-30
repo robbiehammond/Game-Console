@@ -4,6 +4,7 @@
 #include "Engine/Physics/PhysicsHandler.h"
 #include "Engine/Render/RenderHandler.h"
 #include "Engine/IO/IO.h"
+#include "Exception/ExceptionHandler.h"
 
 
 class RealEngine {

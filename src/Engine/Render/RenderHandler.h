@@ -6,15 +6,6 @@
 //Screen is 128x128
 class RenderHandler {
 public:
-    //singleton setup
-    static RenderHandler& getInstance()
-    {
-        static RenderHandler instance;
-        return instance;
-    }
-    RenderHandler(RenderHandler&) = delete;
-    void operator=(RenderHandler const&) = delete;
-
     static void initialize(Adafruit_ST7735* s);
     static void update(Entity* obj);
     static void reset(Entity* objects[], int len);

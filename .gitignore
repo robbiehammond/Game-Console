@@ -4,8 +4,8 @@ cmake-build-*/
 README*
 .DS_Store
 .idea
-src/Schematics/Schematics.pro
-src/Schematics/Schematics.sch-bak
-src/Schematics/Schematics-cache.lib
+Schematics/Schematics.pro
+Schematics/Schematics.sch-bak
+Schematics/Schematics-cache.lib
 lib/
 

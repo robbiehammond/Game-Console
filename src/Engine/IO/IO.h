@@ -5,13 +5,6 @@
 
 class IO {
 public:
-    static IO& getInstance() {
-        static IO instance;
-        return instance;
-    }
-    IO(IO&) = delete;
-    void operator=(IO const&) = delete;
-
     static void update();
     static void initialize(int l, int u, int r, int d, int _a, int _b, int p);
     static void inputConfig(int l, int u, int r, int d, int _a, int _b, int p);
