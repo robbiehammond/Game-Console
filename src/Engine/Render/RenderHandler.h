@@ -17,8 +17,5 @@ private:
     static Adafruit_ST7735* screen;
     static unsigned char screenHeight;
     static unsigned char screenWidth;
-
-
-
 };
 #endif //GAME_CONSOLE_RENDERHANDLER_H

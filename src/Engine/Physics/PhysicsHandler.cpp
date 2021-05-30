@@ -21,10 +21,15 @@ void PhysicsHandler::reset(Entity **objects, int len) {
     //TODO
 }
 
-void PhysicsHandler::initialize(Adafruit_ST7735* s) {
+void PhysicsHandler::initialize(Adafruit_ST7735 *s, int stageWidth) {
     screen = s;
-    screenHeight = screen->height() - 10;
-    screenWidth = screen->width();
+    screenHeight = screen->height();
+
+    //default to stage being screen size if stageWidth left blank
+    if (stageWidth == 0)
+        screenWidth = screen->width();
+    else
+        screenWidth = stageWidth;
 }
 
 
@@ -70,8 +75,16 @@ void PhysicsHandler::applyGravityEffect(Entity *obj) {
 }
 
 void PhysicsHandler::move(Entity *obj) {
-    if (IO::leftPressed()) obj->setOriginPos(obj->getOriginPos().x - 1, obj->getOriginPos().y);
-    if (IO::upPressed()) obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y - 1);
-    if (IO::rightPressed()) obj->setOriginPos(obj->getOriginPos().x + 1, obj->getOriginPos().y);
-    if (IO::downPressed()) obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y + 1);
+    //Probably should move the "would be" checks to setOriginPos
+    if (IO::leftPressed() && !(obj->wouldBeOOBLeft(-1, 0, screenHeight, screenWidth)))
+        obj->setOriginPos(obj->getOriginPos().x - 1, obj->getOriginPos().y);
+
+    if (IO::upPressed() && !(obj->wouldBeOOBTop(0, -1, screenHeight, screenWidth)))
+        obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y - 1);
+
+    if (IO::rightPressed() && !(obj->wouldBeOOBRight(1, 0, screenHeight, screenWidth)))
+        obj->setOriginPos(obj->getOriginPos().x + 1, obj->getOriginPos().y);
+
+    if (IO::downPressed() && !(obj->wouldBeOOBBottom(0, 1, screenHeight, screenWidth)))
+        obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y + 1);
 }

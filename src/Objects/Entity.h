@@ -51,10 +51,15 @@ public:
 
 
     uint16_t getColor() const { return color; };
-    bool isOOBTop() {return OOBTop; }
+    bool isOOBTop() { return OOBTop; }
     bool isOOBBottom() {return OOBBottom;}
     bool isOOBRight() { return OOBRight; }
     bool isOOBLeft() { return OOBLeft; }
+
+    virtual bool wouldBeOOBTop(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
+    virtual bool wouldBeOOBBottom(int xOffset, int yOffset,int screenHeight, int screenWidth) = 0;
+    virtual bool wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
+    virtual bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
 
 
     virtual void render(Adafruit_ST7735 *screen) = 0;

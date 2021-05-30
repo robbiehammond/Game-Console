@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <unity.h>
+#include <../src/Engine/RealEngine.h>
 /*
  * Test with:
  *    pio  test -e uno --verbose

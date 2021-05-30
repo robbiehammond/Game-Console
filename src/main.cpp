@@ -13,7 +13,7 @@
  * 1.) Get fully functional IO
  * 2.) Re-organize Code (folder for src (main and possibly game studio startup), Engine (Render, Physics
  *     IO), Games (self explanatory), Docs (self explanatory), Game Studio (pygame wrapper for testing?),
- *     Schematics.
+ *     schematics.
  *
  *
  */
@@ -35,7 +35,7 @@ Entity* entities[MAX_ENTITIES];
 Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
 //testing devices
-Triangle c(ST77XX_MAGENTA, 10, 50);
+Triangle c(ST77XX_MAGENTA, 10, 10);
 
 
 
@@ -80,7 +80,7 @@ void setup(void) {
     //testing stuff
     entities[0] = &c;
     c.setOriginPos(20, 20);
-    //c.setVelocity(2, 2);
+    c.setVelocity(2, 2);
     c.makePlayer();
 
     //entities[1] = &d;
@@ -89,7 +89,6 @@ void setup(void) {
 }
 
 void loop() {
-    Serial.println(digitalRead(6));
     RealEngine::update(entities, MAX_ENTITIES);
 }
 //

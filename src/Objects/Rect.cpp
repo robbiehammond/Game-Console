@@ -17,8 +17,25 @@ void Rect::render(Adafruit_ST7735 *screen) {
 }
 
 void Rect::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {
-    OOBTop = originPos.y + .5 * height > screenHeight;
-    OOBBottom = originPos.y - .5 * height < 0;
+    OOBBottom = originPos.y + .5 * height > screenHeight;
+    OOBTop = originPos.y - .5 * height < 0;
     OOBRight = originPos.x + width > screenWidth;
     OOBLeft = originPos.x < 0;
 }
+
+bool Rect::wouldBeOOBTop(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.y + yOffset) - .5 * height < 0;
+}
+
+bool Rect::wouldBeOOBBottom(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.y + yOffset) + .5 * height > screenHeight;
+}
+
+bool Rect::wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.x + xOffset) + width > screenWidth;
+}
+
+bool Rect::wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return originPos.x + xOffset < 0;
+}
+

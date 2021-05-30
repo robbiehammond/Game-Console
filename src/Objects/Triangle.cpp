@@ -19,7 +19,25 @@ void Triangle::render(Adafruit_ST7735 *screen) {
 }
 
 void Triangle::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {
+    OOBTop = originPos.y - (.5 * height) < 0;
+    OOBBottom = originPos.y + (.5 * height) > screenHeight;
+    OOBRight = originPos.x + (.5 * base) > screenWidth;
+    OOBLeft = originPos.x - (.5 * base) < 0;
+}
 
+bool Triangle::wouldBeOOBTop(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.y + yOffset) - (.5 * height) < 0;
+}
 
+bool Triangle::wouldBeOOBBottom(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.y + yOffset) + (.5 * height) > screenHeight;
+}
+
+bool Triangle::wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.x + xOffset) + (.5 * base) > screenWidth;
+}
+
+bool Triangle::wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) {
+    return (originPos.x + xOffset) - (.5 * base) < 0;
 }
 

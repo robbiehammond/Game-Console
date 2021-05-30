@@ -10,10 +10,11 @@ enum ExceptionType {
 
 class ExceptionHandler {
 public:
-    static void initialize(Adafruit_ST7735* screen);
+    static void initialize(Adafruit_ST7735* s);
     static void throwException(ExceptionType type, const char* message);
 
 private:
+    static String typeToString(ExceptionType t);
     static Adafruit_ST7735* screen;
     ExceptionHandler() = default;
 

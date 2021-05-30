@@ -3,7 +3,8 @@
 
 
 class Terrain {
-
+public:
+    Terrain(int height, int length);
 };
 
 
