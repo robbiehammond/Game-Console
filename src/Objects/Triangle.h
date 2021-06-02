@@ -11,7 +11,7 @@ public:
     bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) override;
 
     Triangle(uint16_t color, float height, float base);
-    void render(Adafruit_ST7735* screen) override;
+    void render(Adafruit_ST7735 *screen, int xOffset) override;
     void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) override;
 
 private:

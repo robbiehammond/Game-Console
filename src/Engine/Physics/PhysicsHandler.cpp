@@ -23,6 +23,7 @@ void PhysicsHandler::reset(Entity **objects, int len) {
 
 void PhysicsHandler::initialize(Adafruit_ST7735 *s, int stageWidth) {
     screen = s;
+    Serial.println(s->width());
     screenHeight = screen->height();
 
     //default to stage being screen size if stageWidth left blank

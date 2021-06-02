@@ -36,6 +36,8 @@ Game* gameToPlay = nullptr; //wait until setup to figure out which game we're go
 
 //testing devices
 Triangle c(ST77XX_MAGENTA, 10, 10);
+Circle a(ST7735_ORANGE, 10);
+Rect r(ST7735_GREEN, 10, 10);
 
 
 
@@ -82,6 +84,14 @@ void setup(void) {
     c.setOriginPos(20, 20);
     c.setVelocity(2, 2);
     c.makePlayer();
+
+    //entities[1] = &a;
+    //a.setOriginPos(30, 30);
+    //a.setVelocity(0, 0);
+
+    //entities[2] = &r;
+    //r.setOriginPos(50, 50);
+    //r.setVelocity(0,0);
 
     //entities[1] = &d;
     //d.setOriginPos(5,5);

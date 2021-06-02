@@ -1,4 +1,5 @@
 .pio
+include/
 CMakeListsPrivate.txt
 cmake-build-*/
 README*
@@ -8,4 +9,5 @@ schematics/Schematics.pro
 schematics/Schematics.sch-bak
 schematics/Schematics-cache.lib
 lib/
+
 

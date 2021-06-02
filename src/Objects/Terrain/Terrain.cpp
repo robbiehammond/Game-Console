@@ -4,6 +4,3 @@
 
 #include "Terrain.h"
 
-Terrain::Terrain(int height, int length) {
-
-}

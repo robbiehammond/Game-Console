@@ -62,7 +62,7 @@ public:
     virtual bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
 
 
-    virtual void render(Adafruit_ST7735 *screen) = 0;
+    virtual void render(Adafruit_ST7735 *screen, int xOffset) = 0;
     virtual void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) = 0; //no need to take lots of space
 
 

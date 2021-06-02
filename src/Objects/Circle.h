@@ -5,7 +5,7 @@
 class Circle : public Entity {
 public:
     Circle(uint16_t color, float radius);
-    void render(Adafruit_ST7735 *screen) override;
+    void render(Adafruit_ST7735 *screen, int xOffset) override;
     void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) override;
 
     bool wouldBeOOBTop(int xOffset, int yOffset, int screenHeight, int screenWidth) override;

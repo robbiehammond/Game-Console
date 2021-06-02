@@ -1,10 +1,13 @@
 #ifndef GAME_CONSOLE_TERRAIN_H
 #define GAME_CONSOLE_TERRAIN_H
 
+struct TerrainSegment {
+};
 
 class Terrain {
 public:
-    Terrain(int height, int length);
+    void draw();
+
 };
 
 
