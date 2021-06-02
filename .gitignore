@@ -9,5 +9,4 @@ schematics/Schematics.pro
 schematics/Schematics.sch-bak
 schematics/Schematics-cache.lib
 lib/
-
-
+include/

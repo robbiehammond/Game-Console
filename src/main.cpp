@@ -10,10 +10,8 @@
 
 
 /*TODO
- * 1.) Get fully functional IO
- * 2.) Re-organize Code (folder for src (main and possibly game studio startup), Engine (Render, Physics
- *     IO), Games (self explanatory), Docs (self explanatory), Game Studio (pygame wrapper for testing?),
- *     schematics.
+ * 1.) Make scrolling toggleable
+ * 2.) Make scrolling work for other objects
  *
  *
  */

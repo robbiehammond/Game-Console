@@ -17,6 +17,7 @@ private:
     static void render(Entity* e);
     static bool onDisplay(Entity* e);
     static void followPlayer(Entity* e);
+    static bool viewHitStageBoundary();
 
 
     static void renderTerrian(Terrain t);
@@ -27,6 +28,7 @@ private:
     static int xOffset;
     static int leftScreeenBound;
     static int rightScreenBound;
+    static int stageSize;
 
     static Vec2D playerCoords;
     static Vec2D playerVelocity;
