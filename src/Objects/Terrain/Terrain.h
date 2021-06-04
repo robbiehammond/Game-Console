@@ -6,7 +6,9 @@ struct TerrainSegment {
 
 class Terrain {
 public:
+    Terrain(int ylevel, int length);
     void draw();
+
 
 };
 

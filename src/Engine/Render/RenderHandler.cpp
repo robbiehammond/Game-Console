@@ -45,6 +45,7 @@ void RenderHandler::render(Entity* e) {
         playerVelocity = e->getVelocity();
         followPlayer(e);
     }
+    //Serial.println(xOffset);
     e->render(screen, xOffset);
 }
 

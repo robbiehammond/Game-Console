@@ -8,11 +8,12 @@ Circle::Circle(uint16_t color, float radius)
 }
 
 void Circle::render(Adafruit_ST7735 *screen, int xOffset) {
-    if (!isPlayer()) xOffset = 0;
+    if (isPlayer()) xOffset = 0;
     if (filled)
-        screen->fillCircle(originPos.x + xOffset, originPos.y, radius, color);
+        screen->fillCircle(originPos.x - xOffset, originPos.y, radius, color);
     else
-        screen->drawCircle(originPos.x + xOffset, originPos.y, radius, color);
+        screen->drawCircle(originPos.x - xOffset, originPos.y, radius, color);
+
 }
 
 void Circle::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {

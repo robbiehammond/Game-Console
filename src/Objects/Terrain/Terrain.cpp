@@ -4,3 +4,11 @@
 
 #include "Terrain.h"
 
+Terrain::Terrain(int ylevel, int length) {
+
+}
+
+void Terrain::draw() {
+
+}
+

@@ -83,9 +83,9 @@ void setup(void) {
     c.setVelocity(2, 2);
     c.makePlayer();
 
-    //entities[1] = &a;
-    //a.setOriginPos(30, 30);
-    //a.setVelocity(0, 0);
+    entities[1] = &a;
+    a.setOriginPos(30, 30);
+    a.setVelocity(0, 0);
 
     //entities[2] = &r;
     //r.setOriginPos(50, 50);
