@@ -1,6 +1,7 @@
 #include "RealEngine.h"
 
 void RealEngine::update(Entity* objects[], int len) {
+    RenderHandler::flush();
     for (int i = 0; i < len; i++) {
         if (objects[i]) {
             IO::update();

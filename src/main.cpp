@@ -87,13 +87,9 @@ void setup(void) {
     a.setOriginPos(30, 30);
     a.setVelocity(0, 0);
 
-    //entities[2] = &r;
-    //r.setOriginPos(50, 50);
-    //r.setVelocity(0,0);
-
-    //entities[1] = &d;
-    //d.setOriginPos(5,5);
-    //d.setVelocity(1,.7);
+    entities[2] = &r;
+    r.setOriginPos(70, 50);
+    r.setVelocity(0,0);
 }
 
 void loop() {

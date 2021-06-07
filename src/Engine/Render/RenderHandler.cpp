@@ -31,7 +31,6 @@ void RenderHandler::initialize(Adafruit_ST7735 *s, int screenWidth) {
 }
 
 void RenderHandler::update(Entity* obj) {
-    screen->fillScreen(ST77XX_BLACK);
     render(obj);
 }
 
@@ -61,31 +60,38 @@ bool RenderHandler::onDisplay(Entity *e) {
  * be based on how close the edge is to the side of the screen, rather than the center.
  */
 void RenderHandler::followPlayer(Entity* e) {
+    //Serial.println(e->getOriginPos().x);
+
     int xSpeed = playerVelocity.x;
 
     //if moving right while boundary is as far as possible, do nothing
-    if (xSpeed > 0 && rightScreenBound >= stageSize)
+    if (playerCoords.x == stageSize)
         return;
-    if (xSpeed < 0 && leftScreeenBound <= 0)
+    if (playerCoords.x == 0 && leftScreeenBound <= 0)
         return;
 
     xSpeed = abs(playerVelocity.x);
 
 
-    if (playerCoords.x + xSpeed + extraBuffer >= rightScreenBound) {
+    if (playerCoords.x + xSpeed + extraBuffer > rightScreenBound && rightScreenBound < stageSize) {
         rightScreenBound += xSpeed;
         leftScreeenBound += xSpeed;
         xOffset += xSpeed;
     }
-    else if (playerCoords.x - xSpeed - extraBuffer <= leftScreeenBound) {
+    else if (playerCoords.x - xSpeed - extraBuffer < leftScreeenBound && leftScreeenBound > 0) {
         leftScreeenBound -= xSpeed;
         rightScreenBound -= xSpeed;
         xOffset -= xSpeed;
     }
+    //TODO: fix it when it hits the walls
 }
 
 bool RenderHandler::viewHitStageBoundary() {
     return rightScreenBound >= stageSize;
+}
+
+void RenderHandler::flush() {
+    screen->fillScreen(ST77XX_BLACK);
 }
 
 

@@ -10,6 +10,7 @@ public:
     static void initialize(Adafruit_ST7735* s, int screenWidth);
     static void update(Entity* obj);
     static void reset(Entity* objects[], int len);
+    static void flush();
     Adafruit_ST7735* getScreen() { return screen; }
 
 private:

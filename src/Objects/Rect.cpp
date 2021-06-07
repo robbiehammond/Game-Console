@@ -10,11 +10,11 @@ Rect::Rect(uint16_t color, float height, float width)
 }
 
 void Rect::render(Adafruit_ST7735 *screen, int xOffset) {
-    if (!isPlayer()) xOffset = 0;
+    //if (isPlayer()) xOffset = 0;
     if (filled)
-        screen->fillRect(originPos.x + xOffset, originPos.y, width, height, color);
+        screen->fillRect(originPos.x - xOffset, originPos.y, width, height, color);
     else
-        screen->drawRect(originPos.x + xOffset, originPos.y, width, height, color);
+        screen->drawRect(originPos.x - xOffset, originPos.y, width, height, color);
 }
 
 void Rect::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {

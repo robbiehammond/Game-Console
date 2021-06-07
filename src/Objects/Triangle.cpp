@@ -8,7 +8,7 @@ Triangle::Triangle(uint16_t color, float height, float base)
 
 //+ in the y = down
 void Triangle::render(Adafruit_ST7735 *screen, int xOffset) {
-    if (!isPlayer()) xOffset = 0;
+    //if (isPlayer()) xOffset = 0;
     if (filled)
         screen->fillTriangle(originPos.x - .5 * base - xOffset, originPos.y + .5 * height,
                              originPos.x + .5 * base - xOffset, originPos.y + .5 * height,
