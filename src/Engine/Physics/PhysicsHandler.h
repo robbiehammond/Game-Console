@@ -43,6 +43,7 @@ private:
     static void applyBouncyWallsEffect(Entity* obj);
     static void applyGravityEffect(Entity* obj);
 
+
     //friction for floored objects
 
 

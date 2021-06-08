@@ -12,12 +12,12 @@ Vec2D RenderHandler::playerVelocity;
 
 static int extraBuffer = 30; //temporary hack for the time being
 
-void RenderHandler::initialize(Adafruit_ST7735 *s, int screenWidth) {
+void RenderHandler::initialize(Adafruit_ST7735 *s, int StageWidth) {
     screen = s;
     screenHeight = screen->height();
     RenderHandler::screenWidth = screen->width();
 
-    stageSize = screenWidth;
+    stageSize = StageWidth;
 
     //initialize screen to the left, maybe could be edited on demand
     leftScreeenBound = 0;
@@ -48,9 +48,10 @@ void RenderHandler::render(Entity* e) {
     e->render(screen, xOffset);
 }
 
-void RenderHandler::renderTerrian(Terrain t) {
-
+void RenderHandler::renderStaticObjects(Terrain *t) {
+    t->render(screen, 10, 0);
 }
+
 
 bool RenderHandler::onDisplay(Entity *e) {
 
@@ -93,5 +94,6 @@ bool RenderHandler::viewHitStageBoundary() {
 void RenderHandler::flush() {
     screen->fillScreen(ST77XX_BLACK);
 }
+
 
 

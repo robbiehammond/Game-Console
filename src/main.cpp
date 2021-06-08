@@ -29,7 +29,9 @@
 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 const int MAX_ENTITIES = 20; //max number of entities on the screen at once
+const int MAX_TERRAIN = 5;
 Entity* entities[MAX_ENTITIES];
+Terrain* terrian[MAX_TERRAIN];
 Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
 //testing devices
@@ -80,12 +82,12 @@ void setup(void) {
     //testing stuff
     entities[0] = &c;
     c.setOriginPos(20, 20);
-    c.setVelocity(2, 2);
-    c.makePlayer();
+    c.setVelocity(0, 0);
 
     entities[1] = &a;
     a.setOriginPos(30, 30);
-    a.setVelocity(0, 0);
+    a.setVelocity(2, 2);
+    a.makePlayer();
 
     entities[2] = &r;
     r.setOriginPos(70, 50);
@@ -93,7 +95,7 @@ void setup(void) {
 }
 
 void loop() {
-    RealEngine::update(entities, MAX_ENTITIES);
+    RealEngine::update(entities, terrian, MAX_ENTITIES, MAX_TERRAIN);
 }
 //
 //void testlines(uint16_t color) {

@@ -1,8 +1,14 @@
 #include "RealEngine.h"
 
-void RealEngine::update(Entity* objects[], int len) {
+void RealEngine::update(Entity *objects[], Terrain *terrian[], int lenObjects, int lenTerrain) {
     RenderHandler::flush();
-    for (int i = 0; i < len; i++) {
+    //loop through static objects
+    for (int i = 0; i < lenTerrain && terrian[i] != nullptr; i++) {
+        RenderHandler::renderStaticObjects(terrian[i]);
+    }
+
+    //loop through dynamic objects
+    for (int i = 0; i < lenObjects; i++) {
         if (objects[i]) {
             IO::update();
             PhysicsHandler::update(objects[i], FALLING_PHYSICS);
@@ -10,6 +16,8 @@ void RealEngine::update(Entity* objects[], int len) {
         }
     }
 }
+
+
 
 //as of now, leftLocation = 5, right = 2, up = 9, down = 7, a = 0, b = 1;
 void RealEngine::initialize(Adafruit_ST7735 *s) {

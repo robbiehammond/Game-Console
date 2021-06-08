@@ -1,14 +1,15 @@
 #ifndef GAME_CONSOLE_RENDERHANDLER_H
 #define GAME_CONSOLE_RENDERHANDLER_H
 
-#include "Objects/Terrain/Terrain.h"
 #include "Objects/Entity.h"
+#include "Objects/Static Objects/Terrain.h"
 
 //Screen is 128x128
 class RenderHandler {
 public:
-    static void initialize(Adafruit_ST7735* s, int screenWidth);
+    static void initialize(Adafruit_ST7735* s, int StageWidth);
     static void update(Entity* obj);
+    static void renderStaticObjects(Terrain *t);
     static void reset(Entity* objects[], int len);
     static void flush();
     Adafruit_ST7735* getScreen() { return screen; }
@@ -21,7 +22,6 @@ private:
     static bool viewHitStageBoundary();
 
 
-    static void renderTerrian(Terrain t);
     static Adafruit_ST7735* screen;
     static unsigned char screenHeight;
     static unsigned char screenWidth;
