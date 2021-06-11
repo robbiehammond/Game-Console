@@ -9,14 +9,9 @@
 class Test_Game : public Game {
 public:
     void onStart() override;
-
     void mainLoop() override;
+
 private:
-    //Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-    //SObject* backgroundObjects[MAX_ENTITIES];
-    //Entity* entities[MAX_TERRAIN];
-    //const int MAX_ENTITIES = 20;
-    //const int MAX_TERRAIN = 5;
 
 
 };

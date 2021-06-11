@@ -75,10 +75,10 @@ protected:
 
     bool controlled = false;
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
-    bool filled;
-    Vec2D originPos;
-    Vec2D velocity;
-    uint16_t color = ST77XX_BLACK;
+    bool filled = false;
+    Vec2D originPos = Vec2D(0, 0);
+    Vec2D velocity = Vec2D(0, 0);
+    uint16_t color;
 };
 #endif
 

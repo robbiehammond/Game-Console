@@ -17,6 +17,24 @@ public:
     virtual void onStart() = 0;
     virtual void mainLoop() = 0;
 
+
+
+    static const int MAX_ENTITIES = 20;
+    static const int MAX_TERRAIN = 5;
+    static Adafruit_ST7735 tft;
+    static SObject* backgroundObjects[];
+    static Entity* entities[];
+
+
+
+
+
+    void addEntity(Entity* e);
+    void removeEntity(Entity* e);
+private:
+
+
+
 };
 
 

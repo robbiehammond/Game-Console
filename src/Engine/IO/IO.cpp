@@ -1,5 +1,4 @@
 #include "IO.h"
-//probably want to give these guys default values at some point, in case initialize isn't called
 int IO::leftPin;
 int IO::upPin;
 int IO::rightPin;

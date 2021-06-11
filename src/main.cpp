@@ -3,6 +3,7 @@
 #include "Objects/Triangle.h"
 #include "Engine/RealEngine.h"
 #include "Games/Game.h"
+#include "Games/Test_Game.h"
 
 #define TFT_CS        10
 #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
@@ -27,23 +28,7 @@
 
 
 
-Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-const int MAX_ENTITIES = 20; //max number of entities on the screen at once
-const int MAX_TERRAIN = 5;
-Entity* entities[MAX_ENTITIES];
-SObject* terrian[MAX_TERRAIN];
-Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
-//testing devices
-Triangle c(ST77XX_MAGENTA, 10, 10);
-Circle a(ST7735_ORANGE, 10);
-Rect r(ST7735_GREEN, 10, 10);
-
-
-
-float p = 3.1415926;
-void startUpGame(Game* game);
-void onLoop(Game* game);
 //void testlines(uint16_t color);
 //void testdrawtext(char *text, uint16_t color);
 //void testfastlines(uint16_t color1, uint16_t color2);
@@ -55,7 +40,7 @@ void onLoop(Game* game);
 //void tftPrintTest();
 //void mediabuttons();
 //void testdrawcircles(uint8_t radius, uint16_t color);
-
+Test_Game game;
 
 void setup(void) {
     //hardware setup
@@ -65,37 +50,13 @@ void setup(void) {
     pinMode(3, INPUT);
 
 
-    //screen setup
-    tft.initR(INITR_144GREENTAB);
-    tft.fillScreen(ST77XX_BLACK);
 
-    //software setup
-    RealEngine::initialize(&tft);
-    PhysicsHandler::toggleBouncyWalls = true;
+    game.onStart();
 
-
-    //software setup
-    delay(1000);
-
-
-
-    //testing stuff
-    entities[0] = &c;
-    c.setOriginPos(20, 20);
-    c.setVelocity(0, 0);
-
-    entities[1] = &a;
-    a.setOriginPos(30, 30);
-    a.setVelocity(2, 2);
-    a.makePlayer();
-
-    entities[2] = &r;
-    r.setOriginPos(70, 50);
-    r.setVelocity(0,0);
 }
 
 void loop() {
-    RealEngine::update(entities, terrian, MAX_ENTITIES, MAX_TERRAIN);
+    game.mainLoop();
 }
 //
 //void testlines(uint16_t color) {
