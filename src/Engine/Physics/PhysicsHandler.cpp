@@ -3,7 +3,7 @@ Adafruit_ST7735* PhysicsHandler::screen = nullptr;
 bool PhysicsHandler::screenInitialized = false;
 int PhysicsHandler::screenHeight = 0;
 int PhysicsHandler::screenWidth = 0;
-
+Vec2D PhysicsHandler::playerVelocity = Vec2D(1,1);
 bool PhysicsHandler::toggleGravity = false;
 bool PhysicsHandler::toggleBouncyWalls = false;
 
@@ -23,7 +23,6 @@ void PhysicsHandler::reset(Entity **objects, int len) {
 
 void PhysicsHandler::initialize(Adafruit_ST7735 *s, int stageWidth) {
     screen = s;
-    Serial.println(s->width());
     screenHeight = screen->height();
 
     //default to stage being screen size if stageWidth left blank
@@ -41,6 +40,7 @@ void PhysicsHandler::fallingPhysicsUpdate(Entity* curObj) {
     curObj->boundsCheck(screenHeight, screenWidth);
 
     if (curObj->isPlayer()) {
+        curObj->setVelocity(0,0); //stop to update
         move(curObj);
     }
 
@@ -77,15 +77,16 @@ void PhysicsHandler::applyGravityEffect(Entity *obj) {
 
 void PhysicsHandler::move(Entity *obj) {
     //Probably should move the "would be" checks to setOriginPos
-    if (IO::leftPressed() && !(obj->wouldBeOOBLeft(-1, 0, screenHeight, screenWidth)))
-        obj->setOriginPos(obj->getOriginPos().x - 1, obj->getOriginPos().y);
+    if (IO::leftPressed() && !(obj->wouldBeOOBLeft(-1 * playerVelocity.x, 0, screenHeight, screenWidth)))
+        obj->setVelocity(playerVelocity.x * - 1, 0);
 
-    if (IO::upPressed() && !(obj->wouldBeOOBTop(0, -1, screenHeight, screenWidth)))
-        obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y - 1);
+    if (IO::upPressed() && !(obj->wouldBeOOBTop(0, -1 * playerVelocity.y, screenHeight, screenWidth)))
+        obj->setVelocity(0, playerVelocity.y * -1);
 
-    if (IO::rightPressed() && !(obj->wouldBeOOBRight(1, 0, screenHeight, screenWidth)))
-        obj->setOriginPos(obj->getOriginPos().x + 1, obj->getOriginPos().y);
+    if (IO::rightPressed() && !(obj->wouldBeOOBRight(playerVelocity.x, 0, screenHeight, screenWidth)))
+        obj->setVelocity(playerVelocity.x, 0);
 
     if (IO::downPressed() && !(obj->wouldBeOOBBottom(0, 1, screenHeight, screenWidth)))
-        obj->setOriginPos(obj->getOriginPos().x, obj->getOriginPos().y + 1);
+        obj->setVelocity(0, playerVelocity.y);
+
 }

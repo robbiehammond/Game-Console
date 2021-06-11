@@ -10,4 +10,5 @@ void Snake::mainLoop() {
 
 void Snake::onStart() {
 
+
 }

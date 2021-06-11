@@ -4,11 +4,11 @@
 
 #include "Terrain.h"
 
-Terrain::Terrain(int stageWidth, uint16_t color)
-    : stageWidth(stageWidth), color(color) {
+Terrain::Terrain(uint16_t color, int slope, int height)
+    : color(color) {
 
 }
 
 void Terrain::render(Adafruit_ST7735 *screen, int height, int xOffset) {
-    screen->drawRect(0, height, stageWidth, 1, color);
+    screen->drawRect(0, height, screen->width(), 1, color);
 }

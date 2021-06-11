@@ -43,6 +43,8 @@ private:
     static void applyBouncyWallsEffect(Entity* obj);
     static void applyGravityEffect(Entity* obj);
 
+    static Vec2D playerVelocity;
+
 
     //friction for floored objects
 

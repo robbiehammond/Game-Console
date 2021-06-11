@@ -48,8 +48,8 @@ void RenderHandler::render(Entity* e) {
     e->render(screen, xOffset);
 }
 
-void RenderHandler::renderStaticObjects(Terrain *t) {
-    t->render(screen, 10, 0);
+void RenderHandler::renderStaticObjects(SObject *t) {
+    t->render(screen, 10, xOffset);
 }
 
 
@@ -84,7 +84,6 @@ void RenderHandler::followPlayer(Entity* e) {
         rightScreenBound -= xSpeed;
         xOffset -= xSpeed;
     }
-    //TODO: fix it when it hits the walls
 }
 
 bool RenderHandler::viewHitStageBoundary() {

@@ -4,12 +4,11 @@
 #include "Objects/Entity.h"
 #include "Objects/Static Objects/Terrain.h"
 
-//Screen is 128x128
 class RenderHandler {
 public:
     static void initialize(Adafruit_ST7735* s, int StageWidth);
     static void update(Entity* obj);
-    static void renderStaticObjects(Terrain *t);
+    static void renderStaticObjects(SObject *t);
     static void reset(Entity* objects[], int len);
     static void flush();
     Adafruit_ST7735* getScreen() { return screen; }

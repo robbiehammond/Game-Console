@@ -1,13 +1,12 @@
 #ifndef GAME_CONSOLE_TERRAIN_H
 #define GAME_CONSOLE_TERRAIN_H
-#include "Adafruit_ST7735.h"
+#include "SObject.h"
 
-class Terrain {
+class Terrain : public SObject {
 public:
-    Terrain(int stageWidth, uint16_t color);
+    Terrain(uint16_t color, int slope, int height);
     void render(Adafruit_ST7735 *screen, int height, int xOffset);
 private:
-    int stageWidth;
     uint16_t color;
 
 };

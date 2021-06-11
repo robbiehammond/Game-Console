@@ -20,7 +20,7 @@ public:
 
     //all terrian must be placed before the engine is started
     static void initialize(Adafruit_ST7735* s);
-    static void update(Entity *objects[], Terrain *terrian[], int lenObjects, int lenTerrain);
+    static void update(Entity *objects[], SObject* terrian[], int lenObjects, int lenTerrain);
 
 private:
     GameType t;

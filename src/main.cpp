@@ -31,7 +31,7 @@ Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 const int MAX_ENTITIES = 20; //max number of entities on the screen at once
 const int MAX_TERRAIN = 5;
 Entity* entities[MAX_ENTITIES];
-Terrain* terrian[MAX_TERRAIN];
+SObject* terrian[MAX_TERRAIN];
 Game* gameToPlay = nullptr; //wait until setup to figure out which game we're going to play
 
 //testing devices

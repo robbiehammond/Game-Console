@@ -1,15 +1,17 @@
 #include "RealEngine.h"
 
-void RealEngine::update(Entity *objects[], Terrain *terrian[], int lenObjects, int lenTerrain) {
+void RealEngine::update(Entity *objects[], SObject* terrian[], int lenObjects, int lenTerrain) {
     RenderHandler::flush();
     //loop through static objects
     for (int i = 0; i < lenTerrain && terrian[i] != nullptr; i++) {
-        RenderHandler::renderStaticObjects(terrian[i]);
+        
+        //RenderHandler::renderStaticObjects(terrian[i]);
     }
 
     //loop through dynamic objects
     for (int i = 0; i < lenObjects; i++) {
         if (objects[i]) {
+            Serial.println(objects[i]->getOriginPos());
             IO::update();
             PhysicsHandler::update(objects[i], FALLING_PHYSICS);
             RenderHandler::update(objects[i]);

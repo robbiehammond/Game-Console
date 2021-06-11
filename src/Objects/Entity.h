@@ -50,6 +50,7 @@ public:
     bool isPlayer() { return controlled; };
 
 
+
     uint16_t getColor() const { return color; };
     bool isOOBTop() { return OOBTop; }
     bool isOOBBottom() {return OOBBottom;}
