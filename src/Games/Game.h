@@ -27,12 +27,18 @@ public:
 
 
 
-
-
     void addEntity(Entity* e);
     void removeEntity(Entity* e);
-private:
+    void addBackground(SObject* s);
+    void removeBackground(SObject* s);
+    int findOpenEntitySpot();
+    int findOpenBackgroundSpot();
 
+private:
+    static int entityPtr;
+    static int backgroundObjPtr;
+    static bool ePtrHasHitEnd;
+    static bool oPtrHasHitEnd;
 
 
 };

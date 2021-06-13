@@ -31,6 +31,14 @@ void Test_Game::onStart() {
     RealEngine::initialize(&tft);
     PhysicsHandler::toggleBouncyWalls = true;
 
+    addEntity(c);
+    addEntity(a);
+    addEntity(r);
+    c->setOriginPos(20,20);
+    a->setOriginPos(30,30);
+    r->setOriginPos(70,50);
+    a->makePlayer();
+
 
     //software setup
     delay(1000);
@@ -38,7 +46,7 @@ void Test_Game::onStart() {
 
 
     //testing stuff
-    entities[0] = c;
+    /*entities[0] = c;
     entities[0]->setOriginPos(20, 20);
     entities[0]->setVelocity(0, 0);
 
@@ -49,7 +57,7 @@ void Test_Game::onStart() {
 
     entities[2] = r;
     entities[2]->setOriginPos(70, 50);
-    entities[2]->setVelocity(0,0);
+    entities[2]->setVelocity(0,0);*/
 
 
 

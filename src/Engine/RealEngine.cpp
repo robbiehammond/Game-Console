@@ -26,6 +26,6 @@ void RealEngine::initialize(Adafruit_ST7735 *s) {
     PhysicsHandler::initialize(s, 180);
     RenderHandler::initialize(s, 180);
     //change these if input pins need to change
-    IO::initialize(2, 3, 9, 5, 0, 1, 0);
+    IO::initialize(5, 9, 2, 7, 0, 1, 0);
     ExceptionHandler::initialize(s);
 }

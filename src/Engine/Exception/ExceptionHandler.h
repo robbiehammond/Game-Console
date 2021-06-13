@@ -5,7 +5,8 @@
 
 enum ExceptionType {
     OUT_OF_BOUNDS,
-    INCORRECT_USAGE
+    INCORRECT_USAGE,
+    OUT_OF_SPACE
 };
 
 class ExceptionHandler {

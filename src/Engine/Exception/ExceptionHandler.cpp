@@ -17,6 +17,9 @@ String ExceptionHandler::typeToString(ExceptionType t) {
         case INCORRECT_USAGE:
             return "INCORRECT USAGE";
             break;
+        case OUT_OF_SPACE:
+            return "OUT OF SPACE";
+            break;
         default:
             return "UNKNOWN";
     }
