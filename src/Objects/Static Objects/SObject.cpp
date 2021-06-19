@@ -3,3 +3,7 @@
 //
 
 #include "SObject.h"
+
+Vec2D SObject::getPos() {
+    return pos;
+}

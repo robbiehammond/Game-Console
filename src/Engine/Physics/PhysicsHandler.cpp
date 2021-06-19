@@ -1,11 +1,16 @@
 #include "PhysicsHandler.h"
+
 Adafruit_ST7735* PhysicsHandler::screen = nullptr;
 bool PhysicsHandler::screenInitialized = false;
+const int PhysicsHandler::maxAllowableTerrain = Game::MAX_TERRAIN;
 int PhysicsHandler::screenHeight = 0;
 int PhysicsHandler::screenWidth = 0;
-Vec2D PhysicsHandler::playerVelocity = Vec2D(1,1);
+Vec2D PhysicsHandler::playerVelocity = Vec2D(2,2);
+Vec2D PhysicsHandler::playerCoords = Vec2D(0,0); //dependent on player, not vice versa
 bool PhysicsHandler::toggleGravity = false;
 bool PhysicsHandler::toggleBouncyWalls = false;
+bool PhysicsHandler::trackPlayer = false;
+Vec2D PhysicsHandler::SObjPos[maxAllowableTerrain];
 
 void PhysicsHandler::update(Entity *obj, GameType type) {
     switch (type) {
@@ -30,18 +35,26 @@ void PhysicsHandler::initialize(Adafruit_ST7735 *s, int stageWidth) {
         screenWidth = screen->width();
     else
         screenWidth = stageWidth;
+
+    //TODO: Test this
+    for (int i = 0; i < maxAllowableTerrain; i++) {
+        SObjPos[i] = Game::backgroundObjects[i]->getPos();
+    }
 }
 
 
 
 void PhysicsHandler::fallingPhysicsUpdate(Entity* curObj) {
     //pre-op checks/updates: where exactly the object is; is it out of bounds?
-    //curObj->clearImage(screen);
     curObj->boundsCheck(screenHeight, screenWidth);
 
     if (curObj->isPlayer()) {
+        playerCoords =  curObj->getOriginPos();
         curObj->setVelocity(0,0); //stop to update
         move(curObj);
+    }
+    else if (curObj->isEnemy()) {
+        applyEnemyTracking(curObj);
     }
 
     //apply effects
@@ -89,4 +102,22 @@ void PhysicsHandler::move(Entity *obj) {
     if (IO::downPressed() && !(obj->wouldBeOOBBottom(0, 1, screenHeight, screenWidth)))
         obj->setVelocity(0, playerVelocity.y);
 
+}
+
+//TODO: FIX
+void PhysicsHandler::applyEnemyTracking(Entity *obj) {
+    float xdir = playerCoords.x - obj->getOriginPos().x;
+    float ydir = playerCoords.y - obj->getOriginPos().y;
+    Vec2D vel(0,0);
+    if (xdir > 0) //player to right
+        vel.x += obj->getDefaultVelocity().x;
+    else if (xdir < 0)
+        vel.x -= obj->getDefaultVelocity().x;
+
+    if (ydir > 0) //player to bototm
+        vel.y += obj->getDefaultVelocity().y;
+    else if (ydir < 0)
+        vel.y -= obj->getDefaultVelocity().y;
+
+    obj->setVelocity(vel);
 }

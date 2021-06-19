@@ -28,3 +28,5 @@ void Entity::setVelocity(float x, float y) {
 void Entity::setVelocity(Vec2D vec) {
     velocity = vec;
 }
+
+Entity::~Entity() = default;

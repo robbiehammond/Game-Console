@@ -3,6 +3,7 @@
 #include "Objects/Entity.h"
 #include "Engine/IO/IO.h"
 #include "SPI.h"
+#include "Games/Game.h"
 
 enum GameType {
     TOP_DOWN_GRID,
@@ -20,6 +21,7 @@ public:
 
     static bool toggleGravity;
     static bool toggleBouncyWalls;
+    static bool trackPlayer;
 
 
 
@@ -27,13 +29,16 @@ public:
 private:
     PhysicsHandler() {};
 
+    static const int maxAllowableTerrain;
     static int screenHeight;
     static int screenWidth;
     static Adafruit_ST7735* screen;
     static bool screenInitialized;
+    static Vec2D SObjPos[];
 
     //different types of physics updates
     static void fallingPhysicsUpdate(Entity* curObj);
+    static void detectCollision();
 
     static void move(Entity* obj);
 
@@ -42,8 +47,10 @@ private:
     //different types of effects, some may be specialized.
     static void applyBouncyWallsEffect(Entity* obj);
     static void applyGravityEffect(Entity* obj);
+    static void applyEnemyTracking(Entity* obj);
 
     static Vec2D playerVelocity;
+    static Vec2D playerCoords;
 
 
     //friction for floored objects

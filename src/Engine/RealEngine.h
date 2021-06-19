@@ -8,6 +8,7 @@
 #include "Objects/Static Objects/Terrain.h"
 
 
+
 class RealEngine {
 public:
     static RealEngine& getInstance() {
@@ -23,7 +24,7 @@ public:
     static void update(Entity *objects[], SObject* terrian[], int lenObjects, int lenTerrain);
 
 private:
-    GameType t;
+    //GameType t;
     RealEngine() {};
 
 

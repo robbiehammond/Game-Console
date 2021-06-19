@@ -13,9 +13,6 @@ void Test_Game::onStart() {
      * (theoretically) be fine.
      */
 
-
-
-
     //screen setup
     tft.initR(INITR_144GREENTAB);
     tft.fillScreen(ST77XX_BLACK);
@@ -25,11 +22,12 @@ void Test_Game::onStart() {
     Circle* a = new Circle(ST7735_ORANGE, 10);
     a->setFilled(false);
     Rect* r = new Rect(ST7735_GREEN, 10, 10);
-    r->setFilled(false);
+    r->setFilled(true);
 
     //software setup
     RealEngine::initialize(&tft);
     PhysicsHandler::toggleBouncyWalls = true;
+    PhysicsHandler::trackPlayer = true;
 
     addEntity(c);
     addEntity(a);
@@ -37,6 +35,7 @@ void Test_Game::onStart() {
     c->setOriginPos(20,20);
     a->setOriginPos(30,30);
     r->setOriginPos(70,50);
+    r->makeEnemy();
     a->makePlayer();
 
 
@@ -44,20 +43,6 @@ void Test_Game::onStart() {
     delay(1000);
 
 
-
-    //testing stuff
-    /*entities[0] = c;
-    entities[0]->setOriginPos(20, 20);
-    entities[0]->setVelocity(0, 0);
-
-    entities[1] = a;
-    entities[1]->setOriginPos(30, 30);
-    entities[1]->setVelocity(0, 0);
-    entities[1]->makePlayer();
-
-    entities[2] = r;
-    entities[2]->setOriginPos(70, 50);
-    entities[2]->setVelocity(0,0);*/
 
 
 

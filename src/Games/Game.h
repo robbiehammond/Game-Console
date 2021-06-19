@@ -10,6 +10,7 @@
 #include "../Objects/Rect.h"
 #include "../Objects/Circle.h"
 #include "../Objects/Triangle.h"
+#include "../Objects/Static Objects/SObject.h"
 
 
 class Game {

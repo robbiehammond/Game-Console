@@ -43,36 +43,39 @@ public:
     void setVelocity(float x, float y);
     void setVelocity(Vec2D vec);
 
-    bool isFilled() { return filled; };
+    bool isFilled() const { return filled; };
     void setFilled(bool fill) { filled = fill; };
 
     void makePlayer() { enableControllable(); };
-    bool isPlayer() { return controlled; };
+    bool isPlayer() const { return controlled; };
+    void makeEnemy() { enemy = true; };
+    bool isEnemy() { return enemy; } ;
 
 
 
     uint16_t getColor() const { return color; };
-    bool isOOBTop() { return OOBTop; }
-    bool isOOBBottom() {return OOBBottom;}
-    bool isOOBRight() { return OOBRight; }
-    bool isOOBLeft() { return OOBLeft; }
+    bool isOOBTop() const { return OOBTop; }
+    bool isOOBBottom() const {return OOBBottom;}
+    bool isOOBRight() const { return OOBRight; }
+    bool isOOBLeft() const { return OOBLeft; }
 
     virtual bool wouldBeOOBTop(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
     virtual bool wouldBeOOBBottom(int xOffset, int yOffset,int screenHeight, int screenWidth) = 0;
     virtual bool wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
     virtual bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
 
-
+    virtual ~Entity();
     virtual void render(Adafruit_ST7735 *screen, int xOffset) = 0;
     virtual void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) = 0; //no need to take lots of space
-
+    Vec2D getDefaultVelocity() { return defaultVelocity; };
 
 protected:
     void enableControllable() { controlled = true; };
     void disableControllable() { controlled = false; };
-    bool controllable() { return controlled; };
+    bool controllable() const { return controlled; };
+    Vec2D defaultVelocity = Vec2D(1,1);
 
-
+    bool enemy = false;
     bool controlled = false;
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
     bool filled = false;
