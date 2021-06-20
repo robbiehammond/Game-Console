@@ -41,7 +41,7 @@ void RenderHandler::reset(Entity **objects, int len) {
 void RenderHandler::render(Entity* e) {
     if (e->isPlayer()) {
         playerCoords = e->getOriginPos();
-        playerVelocity = e->getVelocity();
+        playerVelocity = e->getCurVelocity();
         followPlayer(e);
     }
     //Serial.println(xOffset);

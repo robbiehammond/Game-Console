@@ -15,25 +15,24 @@
 
 class Game {
 public:
+    Game();
+    void hardwareSetup();
     virtual void onStart() = 0;
     virtual void mainLoop() = 0;
-
-
-
+    void validateGame(); //basically 2nd round of compilation, find errors based on the game state at begin
     static const int MAX_ENTITIES = 20;
     static const int MAX_TERRAIN = 5;
-    static Adafruit_ST7735 tft;
     static SObject* backgroundObjects[];
     static Entity* entities[];
 
-
-
+protected:
     void addEntity(Entity* e);
     void removeEntity(Entity* e);
     void addBackground(SObject* s);
     void removeBackground(SObject* s);
     int findOpenEntitySpot();
     int findOpenBackgroundSpot();
+    static Adafruit_ST7735 tft;
 
 private:
     static int entityPtr;

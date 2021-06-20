@@ -1,14 +1,14 @@
-#include "IO.h"
-int IO::leftPin;
-int IO::upPin;
-int IO::rightPin;
-int IO::downPin;
-int IO::aPin;
-int IO::bPin;
-int IO::pausePin;
-bool IO::inputState[7] = { LOW };
+#include "IOHandler.h"
+int IOHandler::leftPin;
+int IOHandler::upPin;
+int IOHandler::rightPin;
+int IOHandler::downPin;
+int IOHandler::aPin;
+int IOHandler::bPin;
+int IOHandler::pausePin;
+bool IOHandler::inputState[7] = { LOW };
 
-void IO::initialize(int l, int u, int r, int d, int _a, int _b, int p) {
+void IOHandler::initialize(int l, int u, int r, int d, int _a, int _b, int p) {
     inputConfig(l, u, r, d, _a, _b, 0);
     leftPin = l;
     upPin = u;
@@ -21,7 +21,7 @@ void IO::initialize(int l, int u, int r, int d, int _a, int _b, int p) {
 
 }
 
-void IO::inputConfig(int l, int u, int r, int d, int _a, int _b, int p) {
+void IOHandler::inputConfig(int l, int u, int r, int d, int _a, int _b, int p) {
     pinMode(l, INPUT);
     pinMode(u, INPUT);
     pinMode(r, INPUT);
@@ -31,7 +31,7 @@ void IO::inputConfig(int l, int u, int r, int d, int _a, int _b, int p) {
     pinMode(p, INPUT);
 }
 
-void IO::update() {
+void IOHandler::update() {
     inputState[0] = digitalRead(leftPin);
     inputState[1] = digitalRead(upPin);
     inputState[2] = digitalRead(rightPin);

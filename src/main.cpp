@@ -3,20 +3,15 @@
 #include "Objects/Triangle.h"
 #include "Engine/RealEngine.h"
 #include "Games/Game.h"
-#include "Games/Test_Game.h"
+#include "Games/Pong.h"
 
 #define TFT_CS        10
 #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
 #define TFT_DC         8
 
-
-/*TODO
- * 1.) Make scrolling toggleable
- * 2.) Make scrolling work for other objects
- *
- *
+/*
+ * TODO: Get pong working such that user-defined functions can be analyzed by RealEngine.
  */
-
 
 /*
  * -- Game writing Caveats --
@@ -40,7 +35,7 @@
 //void tftPrintTest();
 //void mediabuttons();
 //void testdrawcircles(uint8_t radius, uint16_t color);
-Test_Game game;
+Pong game;
 
 void setup(void) {
     //hardware setup
@@ -49,10 +44,9 @@ void setup(void) {
     pinMode(2, INPUT);
     pinMode(3, INPUT);
 
-
-
+    game.hardwareSetup();
     game.onStart();
-
+    game.validateGame();
 }
 
 void loop() {

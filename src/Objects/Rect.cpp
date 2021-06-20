@@ -24,12 +24,13 @@ void Rect::boundsCheck(unsigned char screenHeight, unsigned char screenWidth) {
     OOBLeft = originPos.x < 0;
 }
 
+//Just height, since "origin" is actually top left
 bool Rect::wouldBeOOBTop(int xOffset, int yOffset, int screenHeight, int screenWidth) {
-    return (originPos.y + yOffset) - .5 * height < 0;
+    return (originPos.y + yOffset) < 0;
 }
 
 bool Rect::wouldBeOOBBottom(int xOffset, int yOffset, int screenHeight, int screenWidth) {
-    return (originPos.y + yOffset) + .5 * height > screenHeight;
+    return (originPos.y + yOffset) + height > screenHeight;
 }
 
 bool Rect::wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) {

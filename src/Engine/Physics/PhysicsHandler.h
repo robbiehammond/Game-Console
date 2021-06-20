@@ -1,15 +1,14 @@
 #ifndef GAME_CONSOLE_PHYSICSHANDLER_H
 #define GAME_CONSOLE_PHYSICSHANDLER_H
 #include "Objects/Entity.h"
-#include "Engine/IO/IO.h"
+#include "Engine/IO/IOHandler.h"
 #include "SPI.h"
-#include "Games/Game.h"
 
 enum GameType {
     TOP_DOWN_GRID,
-    FALLING_PHYSICS
+    FALLING_PHYSICS,
+    MINIMAL
 };
-
 
 class PhysicsHandler {
 public:
@@ -17,6 +16,15 @@ public:
     static void update(Entity *obj, GameType type);
     static void reset(Entity* objects[], int len);
     Adafruit_ST7735* getScreen() { return screen; }
+
+    static void detectCollision(Entity* obj1, Entity* obj2);
+
+    static void moveLeft(Entity* obj);
+    static void moveRight(Entity* obj);
+    static void moveUp(Entity* obj);
+    static void moveDown(Entity* obj);
+
+
 
 
     static bool toggleGravity;
@@ -34,13 +42,12 @@ private:
     static int screenWidth;
     static Adafruit_ST7735* screen;
     static bool screenInitialized;
-    static Vec2D SObjPos[];
 
     //different types of physics updates
-    static void fallingPhysicsUpdate(Entity* curObj);
-    static void detectCollision();
+    static void fallingPhysicsUpdate(Entity *curObj);
+    static void minimalUpdate(Entity* curObj);
 
-    static void move(Entity* obj);
+    static void movePlayer(Entity *obj);
 
 
 

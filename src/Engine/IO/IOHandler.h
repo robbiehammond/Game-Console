@@ -1,9 +1,9 @@
-#ifndef GAME_CONSOLE_IO_H
-#define GAME_CONSOLE_IO_H
+#ifndef GAME_CONSOLE_IOHANDLER_H
+#define GAME_CONSOLE_IOHANDLER_H
 #include "Adafruit_ST7735.h"
 
 
-class IO {
+class IOHandler {
 public:
     static void update();
     static void initialize(int l, int u, int r, int d, int _a, int _b, int p);
@@ -18,7 +18,7 @@ public:
 
 
 private:
-    IO() {};
+    IOHandler() {};
     static int leftPin;
     static int upPin;
     static int rightPin;
@@ -30,4 +30,4 @@ private:
 };
 
 
-#endif //GAME_CONSOLE_IO_H
+#endif //GAME_CONSOLE_IOHANDLER_H

@@ -5,8 +5,10 @@ void ExceptionHandler::initialize(Adafruit_ST7735 *s) {
     screen = s;
 }
 
-void ExceptionHandler::throwException(ExceptionType type, const char* message) {
+[[noreturn]] void ExceptionHandler::throwException(ExceptionType type, const char* message) {
+    screen->fillScreen(ST77XX_BLACK);
     screen->print(typeToString(type) + " EXCEPTION THROWN: " + message);
+    while (true) ;
 }
 
 String ExceptionHandler::typeToString(ExceptionType t) {
@@ -19,6 +21,15 @@ String ExceptionHandler::typeToString(ExceptionType t) {
             break;
         case OUT_OF_SPACE:
             return "OUT OF SPACE";
+            break;
+        case TOO_MANY_PLAYERS:
+            return "TOO MANY PLAYERS";
+            break;
+        case NO_PLAYER:
+            return "NO PLAYER";
+            break;
+        case TOO_SMALL_SCREEN:
+            return "TOO SMALL SCREEN";
             break;
         default:
             return "UNKNOWN";

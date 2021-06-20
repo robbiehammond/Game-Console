@@ -14,8 +14,6 @@ void Test_Game::onStart() {
      */
 
     //screen setup
-    tft.initR(INITR_144GREENTAB);
-    tft.fillScreen(ST77XX_BLACK);
 
     Triangle* c = new Triangle(ST77XX_MAGENTA, 10, 10);
     c->setFilled(false);
@@ -23,19 +21,31 @@ void Test_Game::onStart() {
     a->setFilled(false);
     Rect* r = new Rect(ST7735_GREEN, 10, 10);
     r->setFilled(true);
+    Rect* r1 = new Rect(ST7735_MAGENTA, 10, 10);
+    r->setFilled(true);
+    Rect* r2 = new Rect(ST7735_RED, 10, 10);
+    r->setFilled(true);
+    Rect* r3 = new Rect(ST7735_WHITE, 10, 10);
+    r->setFilled(true);
 
     //software setup
-    RealEngine::initialize(&tft);
+    RealEngine::initialize(&tft, 180, FALLING_PHYSICS);
     PhysicsHandler::toggleBouncyWalls = true;
     PhysicsHandler::trackPlayer = true;
 
     addEntity(c);
     addEntity(a);
     addEntity(r);
+
+
     c->setOriginPos(20,20);
     a->setOriginPos(30,30);
     r->setOriginPos(70,50);
+    
     r->makeEnemy();
+    //r1->makeEnemy();
+    //r2->makeEnemy();
+    //r3->makeEnemy();
     a->makePlayer();
 
 
@@ -47,6 +57,7 @@ void Test_Game::onStart() {
 
 
 }
+
 
 void Test_Game::mainLoop() {
     RealEngine::update(entities, backgroundObjects, MAX_ENTITIES, MAX_TERRAIN);

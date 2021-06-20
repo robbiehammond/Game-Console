@@ -4,7 +4,7 @@
 Circle::Circle(uint16_t color, float radius)
     : Entity(color, CIRCLE), radius(radius) {
     setOriginPos(0, 0);
-    setVelocity(0,0);
+    setDefaultMovingVelocity(0, 0);
 }
 
 void Circle::render(Adafruit_ST7735 *screen, int xOffset) {

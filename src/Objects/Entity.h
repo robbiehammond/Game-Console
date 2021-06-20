@@ -1,6 +1,7 @@
 #ifndef GAME_CONSOLE_ENTITY_H
 #define GAME_CONSOLE_ENTITY_H
 #include "Adafruit_ST7735.h"
+#include "Engine/Exception/ExceptionHandler.h"
 
 //for vel and pos
 class Vec2D : public Printable {
@@ -39,14 +40,15 @@ public:
     void setOriginPos(float x, float y);
     void setOriginPos(Vec2D vec);
 
-    Vec2D getVelocity() const { return velocity; }
-    void setVelocity(float x, float y);
-    void setVelocity(Vec2D vec);
+    Vec2D getCurVelocity() const { return velocity; }
+    Vec2D getDefaultVelocity() { return defaultVelocity; };
+    void setDefaultMovingVelocity(float x, float y);
+    void setDefaultMovingVelocity(Vec2D vec);
 
     bool isFilled() const { return filled; };
     void setFilled(bool fill) { filled = fill; };
 
-    void makePlayer() { enableControllable(); };
+    void makePlayer();
     bool isPlayer() const { return controlled; };
     void makeEnemy() { enemy = true; };
     bool isEnemy() { return enemy; } ;
@@ -67,7 +69,6 @@ public:
     virtual ~Entity();
     virtual void render(Adafruit_ST7735 *screen, int xOffset) = 0;
     virtual void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) = 0; //no need to take lots of space
-    Vec2D getDefaultVelocity() { return defaultVelocity; };
 
 protected:
     void enableControllable() { controlled = true; };
@@ -82,6 +83,7 @@ protected:
     Vec2D originPos = Vec2D(0, 0);
     Vec2D velocity = Vec2D(0, 0);
     uint16_t color;
+    static bool existsPlayer;
 };
 #endif
 

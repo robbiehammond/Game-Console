@@ -9,3 +9,7 @@ schematics/Schematics.pro
 schematics/Schematics.sch-bak
 schematics/Schematics-cache.lib
 lib/
+schematics/fp-info-cache
+schematics/fp-lib-table
+schematics/Schematics.kicad_pcb-bak
+schematics/sym-lib-table

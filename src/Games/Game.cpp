@@ -37,7 +37,7 @@ void Game::removeEntity(Entity *e) {
 void Game::addBackground(SObject *s) {
     if (!oPtrHasHitEnd) {
         backgroundObjects[backgroundObjPtr++] = s;
-        if (oPtrHasHitEnd == MAX_TERRAIN)
+        if (backgroundObjPtr == MAX_TERRAIN)
             oPtrHasHitEnd = true;
     }
     else {
@@ -72,4 +72,25 @@ int Game::findOpenBackgroundSpot() {
             return i;
     }
     return -1;
+}
+
+void Game::validateGame() {
+    bool playerFound = false;
+    for (int i = 0; i < MAX_ENTITIES; i++) {
+        if (entities[i] != nullptr && entities[i]->isPlayer())
+            playerFound = true;
+    }
+    if (!playerFound)
+        ExceptionHandler::throwException(NO_PLAYER, "No player declared. At least one player"
+                                                    " must be in the game.");
+
+}
+
+Game::Game() {
+
+}
+
+void Game::hardwareSetup() {
+    tft.initR(INITR_144GREENTAB);
+    tft.fillScreen(ST77XX_BLACK);
 }
