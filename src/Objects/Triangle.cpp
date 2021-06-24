@@ -4,6 +4,8 @@
 Triangle::Triangle(uint16_t color, float height, float base)
     : Entity(color, TRIANGLE), height(height), base(base) {
     setOriginPos(0,0);
+    generalWidth = base;
+    generalHeight = height;
 }
 
 //+ in the y = down

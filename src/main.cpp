@@ -3,14 +3,14 @@
 #include "Objects/Triangle.h"
 #include "Engine/RealEngine.h"
 #include "Games/Game.h"
-#include "Games/Pong.h"
+#include "Games/Test_Game.h"
 
 #define TFT_CS        10
 #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
 #define TFT_DC         8
 
 /*
- * TODO: Get pong working such that user-defined functions can be analyzed by RealEngine.
+ * TODO: Get Pong's collision detection and ball movement working. Pls refactor stuff so it actually makes sense.
  */
 
 /*
@@ -35,7 +35,7 @@
 //void tftPrintTest();
 //void mediabuttons();
 //void testdrawcircles(uint8_t radius, uint16_t color);
-Pong game;
+Test_Game game;
 
 void setup(void) {
     //hardware setup

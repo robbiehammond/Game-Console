@@ -8,7 +8,7 @@ Vec2D PhysicsHandler::playerVelocity = Vec2D(2,2);
 Vec2D PhysicsHandler::playerCoords = Vec2D(0,0); //dependent on player, not vice versa
 bool PhysicsHandler::toggleGravity = false;
 bool PhysicsHandler::toggleBouncyWalls = false;
-bool PhysicsHandler::trackPlayer = false;
+bool PhysicsHandler::shouldTrackPlayer = false;
 
 void PhysicsHandler::update(Entity *obj, GameType type) {
     switch (type) {
@@ -43,13 +43,13 @@ void PhysicsHandler::fallingPhysicsUpdate(Entity *curObj) {
     //pre-op checks/updates: where exactly the object is; is it out of bounds?
     curObj->boundsCheck(screenHeight, screenWidth);
 
-    curObj->setDefaultMovingVelocity(0, 0); //stop to update
+    curObj->setCurVelocity(0, 0); //stop to update
 
     if (curObj->isPlayer()) {
         playerCoords =  curObj->getOriginPos();
         movePlayer(curObj);
     }
-    else if (curObj->isEnemy()) {
+    else if (curObj->isEnemy() && shouldTrackPlayer) {
         applyEnemyTracking(curObj);
     }
 
@@ -71,11 +71,11 @@ void PhysicsHandler::applyBouncyWallsEffect(Entity* obj) {
 
         if (obj->isOOBBottom() || obj->isOOBTop()) {
             //if it top or bottom of screen, flip y direction
-            obj->setDefaultMovingVelocity(obj->getCurVelocity().x, obj->getCurVelocity().y * -1);
+            obj->setCurVelocity(obj->getCurVelocity().x, obj->getCurVelocity().y * -1);
         }
 
         if (obj->isOOBRight() || obj->isOOBLeft()) {
-            obj->setDefaultMovingVelocity(obj->getCurVelocity().x * -1, obj->getCurVelocity().y);
+            obj->setCurVelocity(obj->getCurVelocity().x * -1, obj->getCurVelocity().y);
         }
 }
 
@@ -112,40 +112,56 @@ void PhysicsHandler::applyEnemyTracking(Entity *obj) {
     else if (ydir < 0)
         vel.y -= obj->getDefaultVelocity().y;
 
-    obj->setDefaultMovingVelocity(vel);
+    obj->setCurVelocity(vel);
 }
 
-void PhysicsHandler::detectCollision(Entity *obj1, Entity *obj2) {
+bool PhysicsHandler::detectCollision(Entity *obj1, Entity *obj2) {
+    if (obj1->getOriginPos().x == obj2->getOriginPos().x || obj1->getOriginPos().y == obj2->getOriginPos().y
+    || obj1->getOriginPos().x + obj1->getGeneralWidth() == obj2->getOriginPos().x + obj2->getGeneralWidth()
+    || obj1->getOriginPos().y + obj1->getGeneralHeight() == obj2->getOriginPos().y + obj2->getGeneralHeight())
+        return false;
+    if (obj1->getOriginPos().x >= obj2->getOriginPos().x + obj2->getGeneralWidth() ||
+    obj1->getOriginPos().x + obj1->getGeneralWidth() >= obj2->getOriginPos().x)
+        return false;
 
+    if (obj2->getOriginPos().y >= obj1->getOriginPos().y + obj1->getGeneralHeight() ||
+        obj2->getOriginPos().y + obj2->getGeneralHeight() >= obj1->getOriginPos().y)
+        return false;
+    return true;
 }
 
 void PhysicsHandler::minimalUpdate(Entity *curObj) {
     curObj->boundsCheck(screenHeight, screenWidth);
-    curObj->setDefaultMovingVelocity(Vec2D(0,0));
+    if (curObj->isPlayer())
+        curObj->setDefaultMovingVelocity(Vec2D(0,0));
+    curObj->setOriginPos(curObj->getOriginPos() + curObj->getCurVelocity());
+
 }
 
 //INDIVIDUAL USE: If each buttons need to control different entities, use these
 void PhysicsHandler::moveLeft(Entity *obj) {
-    if (!(obj->wouldBeOOBLeft(-1 * playerVelocity.x, 0, screenHeight, screenWidth)))
-        obj->setDefaultMovingVelocity(playerVelocity.x * -1, 0);
+    if (!(obj->wouldBeOOBLeft(-1 * obj->getDefaultVelocity().x, 0, screenHeight, screenWidth)))
+        obj->setCurVelocity(obj->getDefaultVelocity().x * -1, obj->getCurVelocity().y);
 
 }
 
 void PhysicsHandler::moveRight(Entity *obj) {
-    if (!(obj->wouldBeOOBRight(playerVelocity.x, 0, screenHeight, screenWidth)))
-        obj->setDefaultMovingVelocity(playerVelocity.x, 0);
+    if (!(obj->wouldBeOOBRight(obj->getDefaultVelocity().x, 0, screenHeight, screenWidth)))
+        obj->setCurVelocity(obj->getDefaultVelocity().x, obj->getCurVelocity().y);
 }
 
 void PhysicsHandler::moveUp(Entity *obj) {
-    if (!(obj->wouldBeOOBTop(0, -1 * playerVelocity.y, screenHeight, screenWidth))) {
-        obj->setDefaultMovingVelocity(0, playerVelocity.y * -1);
-        obj->setOriginPos(obj->getOriginPos() + obj->getCurVelocity());
+    if (!(obj->wouldBeOOBTop(0, -1 * obj->getDefaultVelocity().y, screenHeight, screenWidth))) {
+        obj->setCurVelocity(obj->getCurVelocity().x, obj->getDefaultVelocity().y * -1);
     }
 }
 
 void PhysicsHandler::moveDown(Entity *obj) {
-    if (!(obj->wouldBeOOBBottom(0, 1, screenHeight, screenWidth))) {
-        obj->setDefaultMovingVelocity(0, playerVelocity.y);
-        obj->setOriginPos(obj->getOriginPos() + obj->getCurVelocity());
+    if (!(obj->wouldBeOOBBottom(0, obj->getDefaultVelocity().y, screenHeight, screenWidth))) {
+        obj->setCurVelocity(obj->getCurVelocity().x, obj->getDefaultVelocity().y);
     }
+}
+
+void PhysicsHandler::reverseVelocity(Entity *obj) {
+    obj->setCurVelocity(-1 * obj->getDefaultVelocity().x, -1 * obj->getDefaultVelocity().y);
 }

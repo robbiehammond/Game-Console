@@ -17,7 +17,8 @@ public:
     static void reset(Entity* objects[], int len);
     Adafruit_ST7735* getScreen() { return screen; }
 
-    static void detectCollision(Entity* obj1, Entity* obj2);
+    static bool detectCollision(Entity* obj1, Entity* obj2);
+    static void reverseVelocity(Entity* obj);
 
     static void moveLeft(Entity* obj);
     static void moveRight(Entity* obj);
@@ -29,7 +30,7 @@ public:
 
     static bool toggleGravity;
     static bool toggleBouncyWalls;
-    static bool trackPlayer;
+    static bool shouldTrackPlayer;
 
 
 

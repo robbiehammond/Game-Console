@@ -7,6 +7,8 @@
 Rect::Rect(uint16_t color, float height, float width)
     : Entity(color, RECTANGLE), height(height), width(width) {
     setOriginPos(0, 0);
+    generalWidth = width;
+    generalHeight = height;
 }
 
 void Rect::render(Adafruit_ST7735 *screen, int xOffset) {

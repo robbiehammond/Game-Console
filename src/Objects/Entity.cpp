@@ -35,4 +35,17 @@ void Entity::makePlayer() {
     existsPlayer = true;
 }
 
+int Entity::getGeneralWidth() {
+    return generalWidth;
+}
+
+int Entity::getGeneralHeight() {
+    return generalHeight;
+}
+
+void Entity::setCurVelocity(Vec2D vel) {
+    velocity = vel;
+
+}
+
 Entity::~Entity() = default;

@@ -41,6 +41,7 @@ public:
     void setOriginPos(Vec2D vec);
 
     Vec2D getCurVelocity() const { return velocity; }
+    void setCurVelocity(float x, float y) { velocity = Vec2D(x, y); };
     Vec2D getDefaultVelocity() { return defaultVelocity; };
     void setDefaultMovingVelocity(float x, float y);
     void setDefaultMovingVelocity(Vec2D vec);
@@ -66,11 +67,18 @@ public:
     virtual bool wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
     virtual bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
 
+    int getGeneralWidth();
+    int getGeneralHeight();
+
     virtual ~Entity();
     virtual void render(Adafruit_ST7735 *screen, int xOffset) = 0;
     virtual void boundsCheck(unsigned char screenHeight, unsigned char screenWidth) = 0; //no need to take lots of space
 
+    void setCurVelocity(Vec2D vel);
+
 protected:
+    int generalWidth;
+    int generalHeight; //for simple collision detection
     void enableControllable() { controlled = true; };
     void disableControllable() { controlled = false; };
     bool controllable() const { return controlled; };

@@ -6,6 +6,7 @@ auto* ball = new Circle(ST7735_WHITE, 2);
 
 void Pong::onStart() {
     RealEngine::initialize(&tft, 128, MINIMAL);
+    PhysicsHandler::toggleBouncyWalls = true;
 
     leftPlayer->setDefaultMovingVelocity(0,1);
     leftPlayer->setOriginPos(3, tft.height() / 2);
@@ -16,6 +17,8 @@ void Pong::onStart() {
     rightPlayer->setFilled(true);
 
     ball->setOriginPos(tft.height() / 2, tft.width() / 2 - 10);
+    ball->setDefaultMovingVelocity(1, 1);
+    ball->setDefaultMovingVelocity(Vec2D(1,1));
     ball->setFilled(true);
 
     leftPlayer->makePlayer();
@@ -37,4 +40,10 @@ void Pong::mainLoop() {
         PhysicsHandler::moveUp(rightPlayer);
     if (IOHandler::rightPressed())
         PhysicsHandler::moveDown(rightPlayer);
+
+    if (PhysicsHandler::detectCollision(leftPlayer, ball))
+        PhysicsHandler::reverseVelocity(ball);
+    if (PhysicsHandler::detectCollision(rightPlayer, ball))
+        PhysicsHandler::reverseVelocity(ball);
+
 }

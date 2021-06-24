@@ -19,19 +19,15 @@ void Test_Game::onStart() {
     c->setFilled(false);
     Circle* a = new Circle(ST7735_ORANGE, 10);
     a->setFilled(false);
+    a->setDefaultMovingVelocity(2,2);
+
     Rect* r = new Rect(ST7735_GREEN, 10, 10);
-    r->setFilled(true);
-    Rect* r1 = new Rect(ST7735_MAGENTA, 10, 10);
-    r->setFilled(true);
-    Rect* r2 = new Rect(ST7735_RED, 10, 10);
-    r->setFilled(true);
-    Rect* r3 = new Rect(ST7735_WHITE, 10, 10);
-    r->setFilled(true);
 
     //software setup
     RealEngine::initialize(&tft, 180, FALLING_PHYSICS);
+
     PhysicsHandler::toggleBouncyWalls = true;
-    PhysicsHandler::trackPlayer = true;
+    PhysicsHandler::shouldTrackPlayer = true;
 
     addEntity(c);
     addEntity(a);
