@@ -8,17 +8,17 @@ void Pong::onStart() {
     RealEngine::initialize(&tft, 128, MINIMAL);
     PhysicsHandler::toggleBouncyWalls = true;
 
-    leftPlayer->setDefaultMovingVelocity(0,1);
+    leftPlayer->setDefaultMovingVelocity(0,2);
     leftPlayer->setOriginPos(3, tft.height() / 2);
     leftPlayer->setFilled(true);
 
-    rightPlayer->setDefaultMovingVelocity(0, 1);
+    rightPlayer->setDefaultMovingVelocity(0, 2);
     rightPlayer->setOriginPos(124, tft.height() / 2 - 10);
     rightPlayer->setFilled(true);
 
     ball->setOriginPos(tft.height() / 2, tft.width() / 2 - 10);
     ball->setDefaultMovingVelocity(1, 1);
-    ball->setDefaultMovingVelocity(Vec2D(1,1));
+    ball->setCurVelocity(1,1);
     ball->setFilled(true);
 
     leftPlayer->makePlayer();

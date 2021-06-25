@@ -40,8 +40,8 @@ public:
     void setOriginPos(float x, float y);
     void setOriginPos(Vec2D vec);
 
-    Vec2D getCurVelocity() const { return velocity; }
-    void setCurVelocity(float x, float y) { velocity = Vec2D(x, y); };
+    Vec2D getCurVelocity() const { return currentVelocity; }
+    void setCurVelocity(float x, float y) { currentVelocity = Vec2D(x, y); };
     Vec2D getDefaultVelocity() { return defaultVelocity; };
     void setDefaultMovingVelocity(float x, float y);
     void setDefaultMovingVelocity(Vec2D vec);
@@ -67,8 +67,8 @@ public:
     virtual bool wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
     virtual bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
 
-    int getGeneralWidth();
-    int getGeneralHeight();
+    int getGeneralWidth() const;
+    int getGeneralHeight() const;
 
     virtual ~Entity();
     virtual void render(Adafruit_ST7735 *screen, int xOffset) = 0;
@@ -89,7 +89,7 @@ protected:
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds
     bool filled = false;
     Vec2D originPos = Vec2D(0, 0);
-    Vec2D velocity = Vec2D(0, 0);
+    Vec2D currentVelocity = Vec2D(0, 0);
     uint16_t color;
     static bool existsPlayer;
 };

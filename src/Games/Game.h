@@ -15,7 +15,6 @@
 
 class Game {
 public:
-    Game();
     void hardwareSetup();
     virtual void onStart() = 0;
     virtual void mainLoop() = 0;

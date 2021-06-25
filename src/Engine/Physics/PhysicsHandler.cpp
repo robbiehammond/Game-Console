@@ -120,21 +120,27 @@ bool PhysicsHandler::detectCollision(Entity *obj1, Entity *obj2) {
     || obj1->getOriginPos().x + obj1->getGeneralWidth() == obj2->getOriginPos().x + obj2->getGeneralWidth()
     || obj1->getOriginPos().y + obj1->getGeneralHeight() == obj2->getOriginPos().y + obj2->getGeneralHeight())
         return false;
+
     if (obj1->getOriginPos().x >= obj2->getOriginPos().x + obj2->getGeneralWidth() ||
-    obj1->getOriginPos().x + obj1->getGeneralWidth() >= obj2->getOriginPos().x)
+    obj2->getOriginPos().x >= obj1->getOriginPos().x + obj1->getGeneralWidth())
         return false;
 
-    if (obj2->getOriginPos().y >= obj1->getOriginPos().y + obj1->getGeneralHeight() ||
-        obj2->getOriginPos().y + obj2->getGeneralHeight() >= obj1->getOriginPos().y)
+    if (obj1->getOriginPos().y >= obj2->getOriginPos().y + obj2->getGeneralHeight() ||
+        obj2->getOriginPos().y  >= obj1->getOriginPos().y + obj1->getGeneralHeight())
         return false;
+
     return true;
 }
 
 void PhysicsHandler::minimalUpdate(Entity *curObj) {
     curObj->boundsCheck(screenHeight, screenWidth);
-    if (curObj->isPlayer())
-        curObj->setDefaultMovingVelocity(Vec2D(0,0));
     curObj->setOriginPos(curObj->getOriginPos() + curObj->getCurVelocity());
+    if (curObj->isPlayer())
+        curObj->setCurVelocity(Vec2D(0,0));
+    else { //everything that isn't a player
+        ;
+    }
+
 
 }
 
@@ -163,5 +169,5 @@ void PhysicsHandler::moveDown(Entity *obj) {
 }
 
 void PhysicsHandler::reverseVelocity(Entity *obj) {
-    obj->setCurVelocity(-1 * obj->getDefaultVelocity().x, -1 * obj->getDefaultVelocity().y);
+    obj->setCurVelocity(-1 * obj->getCurVelocity().x, -1 * obj->getCurVelocity().y);
 }

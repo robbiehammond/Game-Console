@@ -21,13 +21,12 @@ void Entity::setOriginPos(float x, float y) {
 }
 
 void Entity::setDefaultMovingVelocity(float x, float y) {
-    velocity.x = x;
-    velocity.y = y;
+    defaultVelocity = Vec2D(x, y);
 }
 
 
 void Entity::setDefaultMovingVelocity(Vec2D vec) {
-    velocity = vec;
+    defaultVelocity = vec;
 }
 
 void Entity::makePlayer() {
@@ -35,16 +34,16 @@ void Entity::makePlayer() {
     existsPlayer = true;
 }
 
-int Entity::getGeneralWidth() {
+int Entity::getGeneralWidth() const {
     return generalWidth;
 }
 
-int Entity::getGeneralHeight() {
+int Entity::getGeneralHeight() const {
     return generalHeight;
 }
 
 void Entity::setCurVelocity(Vec2D vel) {
-    velocity = vel;
+    currentVelocity = vel;
 
 }
 

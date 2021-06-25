@@ -86,9 +86,6 @@ void Game::validateGame() {
 
 }
 
-Game::Game() {
-
-}
 
 void Game::hardwareSetup() {
     tft.initR(INITR_144GREENTAB);
