@@ -14,6 +14,14 @@ public:
     bool wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) override;
     bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) override;
 
+    int getAbsoluteTop() const override;
+
+    int getAbsoluteBottom() const override;
+
+    int getAbsoluteLeft() const override;
+
+    int getAbsoluteRight() const override;
+
 private:
     float height;
     float base;

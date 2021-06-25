@@ -43,3 +43,19 @@ bool Rect::wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screen
     return originPos.x + xOffset < 0;
 }
 
+int Rect::getAbsoluteTop() const {
+    return originPos.y;
+}
+
+int Rect::getAbsoluteBottom() const {
+    return originPos.y + height;
+}
+
+int Rect::getAbsoluteLeft() const {
+    return originPos.x;
+}
+
+int Rect::getAbsoluteRight() const {
+    return originPos.x + width;
+}
+

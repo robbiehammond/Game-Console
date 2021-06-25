@@ -171,3 +171,29 @@ void PhysicsHandler::moveDown(Entity *obj) {
 void PhysicsHandler::reverseVelocity(Entity *obj) {
     obj->setCurVelocity(-1 * obj->getCurVelocity().x, -1 * obj->getCurVelocity().y);
 }
+
+void PhysicsHandler::reverseHorizontalVelocity(Entity *obj) {
+    obj->setCurVelocity(-1 * obj->getCurVelocity().x, obj->getCurVelocity().y);
+
+}
+
+void PhysicsHandler::reverseVerticalVelocity(Entity *obj) {
+    obj->setCurVelocity(obj->getCurVelocity().x, -1 * obj->getCurVelocity().y);
+
+}
+
+bool PhysicsHandler::detectCollision(Entity *obj, ScreenEdge edge) {
+    switch (edge) {
+        case TOPEDGE:
+            return obj->getAbsoluteTop() == 0;
+        case BOTTOMEDGE:
+            return obj->getAbsoluteBottom() == screenHeight;
+        case LEFTEDGE:
+            return obj->getAbsoluteLeft() == 0;
+        case RIGHTEDGE:
+            return obj->getAbsoluteRight() == screenWidth;
+        default:
+            return false;
+    }
+
+}

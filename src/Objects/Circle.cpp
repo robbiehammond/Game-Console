@@ -40,3 +40,19 @@ bool Circle::wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int scre
     return (originPos.x + xOffset) - radius < 0;
 }
 
+int Circle::getAbsoluteTop() const {
+    return originPos.y - radius;
+}
+
+int Circle::getAbsoluteBottom() const {
+    return originPos.y - radius;
+}
+
+int Circle::getAbsoluteLeft() const {
+    return originPos.x - radius;
+}
+
+int Circle::getAbsoluteRight() const {
+    return originPos.x + radius;
+}
+

@@ -44,3 +44,19 @@ bool Triangle::wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int sc
     return (originPos.x + xOffset) - (.5 * base) < 0;
 }
 
+int Triangle::getAbsoluteTop() const {
+    return originPos.y - (.5 * height);
+}
+
+int Triangle::getAbsoluteBottom() const {
+    return originPos.y + (.5 * height);
+}
+
+int Triangle::getAbsoluteLeft() const {
+    return originPos.x + (.5 * base);
+}
+
+int Triangle::getAbsoluteRight() const {
+    return originPos.x + (.5 * base);
+}
+

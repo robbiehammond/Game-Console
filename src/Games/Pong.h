@@ -8,8 +8,10 @@
 class Pong : public Game {
 public:
     void onStart() override;
-
     void mainLoop() override;
+
+    //set ball, launch it with random velocity
+    void resetGame();
 
 
 };

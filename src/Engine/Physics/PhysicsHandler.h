@@ -10,6 +10,13 @@ enum GameType {
     MINIMAL
 };
 
+enum ScreenEdge {
+    TOPEDGE,
+    BOTTOMEDGE,
+    LEFTEDGE,
+    RIGHTEDGE
+};
+
 class PhysicsHandler {
 public:
     static void initialize(Adafruit_ST7735 *s, int stageWidth);
@@ -18,6 +25,10 @@ public:
     Adafruit_ST7735* getScreen() { return screen; }
 
     static bool detectCollision(Entity* obj1, Entity* obj2);
+    static bool detectCollision(Entity* obj, ScreenEdge edge);
+
+    static void reverseHorizontalVelocity(Entity* obj);
+    static void reverseVerticalVelocity(Entity* obj);
     static void reverseVelocity(Entity* obj);
 
     static void moveLeft(Entity* obj);

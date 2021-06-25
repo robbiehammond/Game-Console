@@ -57,5 +57,6 @@ void Test_Game::onStart() {
 
 void Test_Game::mainLoop() {
     RealEngine::update(entities, backgroundObjects, MAX_ENTITIES, MAX_TERRAIN);
+    Serial.println(entities[1]->getOriginPos());
 }
 

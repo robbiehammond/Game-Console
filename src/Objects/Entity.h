@@ -67,6 +67,12 @@ public:
     virtual bool wouldBeOOBRight(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
     virtual bool wouldBeOOBLeft(int xOffset, int yOffset, int screenHeight, int screenWidth) = 0;
 
+    //get true boundaries of object
+    virtual int getAbsoluteTop() const = 0;
+    virtual int getAbsoluteBottom() const = 0;
+    virtual int getAbsoluteLeft() const = 0;
+    virtual int getAbsoluteRight() const = 0;
+
     int getGeneralWidth() const;
     int getGeneralHeight() const;
 

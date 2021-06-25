@@ -3,10 +3,10 @@
 auto* leftPlayer = new Rect(ST7735_WHITE, 20, 5);
 auto* rightPlayer = new Rect(ST7735_WHITE, 20, 5);
 auto* ball = new Circle(ST7735_WHITE, 2);
+Vec2D center(54,54);
 
 void Pong::onStart() {
     RealEngine::initialize(&tft, 128, MINIMAL);
-    PhysicsHandler::toggleBouncyWalls = true;
 
     leftPlayer->setDefaultMovingVelocity(0,2);
     leftPlayer->setOriginPos(3, tft.height() / 2);
@@ -16,8 +16,6 @@ void Pong::onStart() {
     rightPlayer->setOriginPos(124, tft.height() / 2 - 10);
     rightPlayer->setFilled(true);
 
-    ball->setOriginPos(tft.height() / 2, tft.width() / 2 - 10);
-    ball->setDefaultMovingVelocity(1, 1);
     ball->setCurVelocity(1,1);
     ball->setFilled(true);
 
@@ -28,6 +26,8 @@ void Pong::onStart() {
     addEntity(leftPlayer);
     addEntity(rightPlayer);
     addEntity(ball);
+
+    resetGame();
 }
 
 void Pong::mainLoop() {
@@ -41,9 +41,26 @@ void Pong::mainLoop() {
     if (IOHandler::rightPressed())
         PhysicsHandler::moveDown(rightPlayer);
 
-    if (PhysicsHandler::detectCollision(leftPlayer, ball))
-        PhysicsHandler::reverseVelocity(ball);
-    if (PhysicsHandler::detectCollision(rightPlayer, ball))
-        PhysicsHandler::reverseVelocity(ball);
+    if (PhysicsHandler::detectCollision(leftPlayer, ball) || PhysicsHandler::detectCollision(rightPlayer, ball))
+        PhysicsHandler::reverseHorizontalVelocity(ball);
+    if (PhysicsHandler::detectCollision(ball, TOPEDGE) || PhysicsHandler::detectCollision(ball, BOTTOMEDGE))
+        PhysicsHandler::reverseVerticalVelocity(ball);
 
+    if (PhysicsHandler::detectCollision(ball, RIGHTEDGE)) {
+        //left player gets score, implement this
+        resetGame();
+    }
+    if (PhysicsHandler::detectCollision(ball, LEFTEDGE)) {
+        //right player gets score
+        resetGame();
+    }
+}
+
+void Pong::resetGame() {
+    ball->setOriginPos(center);
+    int xVel = random(1, 4);
+    int yVel = random(3);
+    ball->setDefaultMovingVelocity(xVel, yVel);
+    ball->setCurVelocity(xVel, yVel);
+    Serial.println(ball->getDefaultVelocity());
 }
