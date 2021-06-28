@@ -6,6 +6,7 @@
 #include "Engine/IO/IOHandler.h"
 #include "Exception/ExceptionHandler.h"
 #include "Objects/Static Objects/Terrain.h"
+#include "Text/TextHandler.h"
 
 class RealEngine {
 public:

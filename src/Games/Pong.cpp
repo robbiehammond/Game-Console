@@ -32,6 +32,7 @@ void Pong::onStart() {
 
 void Pong::mainLoop() {
     RealEngine::update(entities, backgroundObjects, MAX_ENTITIES, MAX_TERRAIN);
+
     if (IOHandler::leftPressed())
         PhysicsHandler::moveUp(leftPlayer);
     if (IOHandler::downPressed())
@@ -58,8 +59,10 @@ void Pong::mainLoop() {
 
 void Pong::resetGame() {
     ball->setOriginPos(center);
-    int xVel = random(1, 4);
-    int yVel = random(3);
+    int xVel = random(-2, 2);
+    if (xVel == 0) xVel = 1; //if 0, game is unplayable
+
+    int yVel = random(-2, 2);
     ball->setDefaultMovingVelocity(xVel, yVel);
     ball->setCurVelocity(xVel, yVel);
     Serial.println(ball->getDefaultVelocity());

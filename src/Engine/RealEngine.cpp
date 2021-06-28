@@ -14,6 +14,7 @@ void RealEngine::update(Entity **objects, SObject **terrian, int lenObjects, int
             IOHandler::update();
             PhysicsHandler::update(objects[i], t);
             RenderHandler::update(objects[i]);
+
         }
     }
 }
@@ -26,8 +27,10 @@ void RealEngine::initialize(Adafruit_ST7735 *s, int stageWidth, GameType type) {
         ExceptionHandler::throwException(TOO_SMALL_SCREEN, "Screen must have width of at least 128.");
     t = type;
     PhysicsHandler::initialize(s, stageWidth);
+
     RenderHandler::initialize(s, stageWidth);
     //change these if input pins need to change
     IOHandler::initialize(A4, A3, A5, A2, 0, 1, 0);
+
     ExceptionHandler::initialize(s);
 }
