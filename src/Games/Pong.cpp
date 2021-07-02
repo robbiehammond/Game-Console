@@ -3,6 +3,9 @@
 auto* leftPlayer = new Rect(ST7735_WHITE, 20, 5);
 auto* rightPlayer = new Rect(ST7735_WHITE, 20, 5);
 auto* ball = new Circle(ST7735_WHITE, 2);
+auto* p1Score = new Text("0");
+auto* p2Score = new Text("0");
+
 Vec2D center(54,54);
 
 void Pong::onStart() {
@@ -18,6 +21,14 @@ void Pong::onStart() {
 
     ball->setCurVelocity(1,1);
     ball->setFilled(true);
+
+    p1Score->setX(20);
+    p2Score->setX(tft.width() - 20);
+    p1Score->setY(50);
+    p2Score->setY(50);
+
+    TextHandler::addText(p1Score);
+    TextHandler::addText(p2Score);
 
     leftPlayer->makePlayer();
     rightPlayer->makePlayer();

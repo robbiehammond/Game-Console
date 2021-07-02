@@ -31,6 +31,8 @@ String ExceptionHandler::typeToString(ExceptionType t) {
         case TOO_SMALL_SCREEN:
             return "TOO SMALL SCREEN";
             break;
+        case TOO_MUCH_TEXT:
+            return "TOO MUCH TEXT";
         default:
             return "UNKNOWN";
     }

@@ -11,6 +11,7 @@ class SObject {
 public:
     virtual void render(Adafruit_ST7735* screen, int height, int xOffset) = 0;
     Vec2D getPos();
+    ~SObject() = default;;
 private:
     Vec2D pos;
 

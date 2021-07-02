@@ -9,7 +9,8 @@ enum ExceptionType {
     OUT_OF_SPACE,
     TOO_MANY_PLAYERS,
     NO_PLAYER,
-    TOO_SMALL_SCREEN
+    TOO_SMALL_SCREEN,
+    TOO_MUCH_TEXT
 };
 
 class ExceptionHandler {

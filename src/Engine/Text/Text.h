@@ -5,12 +5,22 @@
 
 class Text {
 private:
-    const char* words;
+    char* words;
+    bool shouldShow = false;
     int xPos;
-    int yPox;
+    int yPos;
 public:
-    Text();
+
     Text(char* words);
+    Text(char* words, int x, int y);
+    int getX();
+    void setX(int x);
+    int getY();
+    void setY(int y);
+    const char* getWords();
+    bool shouldBeDisplayed();
+    void hide();
+    void show();
 
 };
 
