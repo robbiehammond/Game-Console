@@ -7,16 +7,15 @@ int TextHandler::textListPtr = 0;
 void TextHandler::update() {
     for (int i = 0; i < MAXTEXT; i++) {
         if (textList[i]) {
-            Serial.println("here");
-            screen->setCursor(textList[i]->getX(), textList[i]->getY());
-            screen->write(textList[i]->getWords());
+             screen->setCursor(textList[i]->getX(), textList[i]->getY());
+             screen->write(textList[i]->getWords(), textList[i]->getSize());
         }
     }
 }
 
 void TextHandler::initialize(Adafruit_ST7735 *s) {
     screen = s;
-    screen->setTextSize(5);
+    screen->setTextSize(1);
     screen->setTextColor(ST7735_WHITE);
 }
 

@@ -21,8 +21,10 @@ public:
     //all terrian must be placed before the engine is started
     static void initialize(Adafruit_ST7735 *s, int stageWidth, GameType type);
     static void update(Entity **objects, SObject **terrian, int lenObjects, int lenTerrain);
+    [[noreturn]] static void endGame(char* text);
 
 private:
+    static Adafruit_ST7735* screen;
     static GameType t;
     RealEngine() {};
 

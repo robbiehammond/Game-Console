@@ -3,8 +3,11 @@
 auto* leftPlayer = new Rect(ST7735_WHITE, 20, 5);
 auto* rightPlayer = new Rect(ST7735_WHITE, 20, 5);
 auto* ball = new Circle(ST7735_WHITE, 2);
-auto* p1Score = new Text("0");
-auto* p2Score = new Text("0");
+int player1Score = 0;
+int player2Score = 0;
+auto* p1ScoreText = new Text(0);
+auto* p2ScoreText = new Text(0);
+const int winScore = 5;
 
 Vec2D center(54,54);
 
@@ -22,13 +25,13 @@ void Pong::onStart() {
     ball->setCurVelocity(1,1);
     ball->setFilled(true);
 
-    p1Score->setX(20);
-    p2Score->setX(tft.width() - 20);
-    p1Score->setY(50);
-    p2Score->setY(50);
+    p1ScoreText->setX(10);
+    p2ScoreText->setX(tft.width() - 10);
+    p1ScoreText->setY(20);
+    p2ScoreText->setY(20);
 
-    TextHandler::addText(p1Score);
-    TextHandler::addText(p2Score);
+    TextHandler::addText(p1ScoreText);
+    TextHandler::addText(p2ScoreText);
 
     leftPlayer->makePlayer();
     rightPlayer->makePlayer();
@@ -42,6 +45,9 @@ void Pong::onStart() {
 }
 
 void Pong::mainLoop() {
+    Serial.println(player1Score);
+    Serial.println(player2Score);
+    Serial.println();
     RealEngine::update(entities, backgroundObjects, MAX_ENTITIES, MAX_TERRAIN);
 
     if (IOHandler::leftPressed())
@@ -60,15 +66,27 @@ void Pong::mainLoop() {
 
     if (PhysicsHandler::detectCollision(ball, RIGHTEDGE)) {
         //left player gets score, implement this
+        player1Score++;
+        p1ScoreText->setWords(player1Score);
         resetGame();
     }
     if (PhysicsHandler::detectCollision(ball, LEFTEDGE)) {
         //right player gets score
+        player2Score++;
+        p2ScoreText->setWords(player2Score);
         resetGame();
     }
+
 }
 
 void Pong::resetGame() {
+    if (player1Score == winScore) {
+        finishGame(1);
+    }
+    else if (player2Score == winScore) {
+        finishGame(2);
+    }
+
     ball->setOriginPos(center);
     int xVel = random(-2, 2);
     if (xVel == 0) xVel = 1; //if 0, game is unplayable
@@ -76,5 +94,18 @@ void Pong::resetGame() {
     int yVel = random(-2, 2);
     ball->setDefaultMovingVelocity(xVel, yVel);
     ball->setCurVelocity(xVel, yVel);
-    Serial.println(ball->getDefaultVelocity());
+    //Serial.println(ball->getDefaultVelocity());
 }
+
+void Pong::finishGame(int playerNum) {
+    if (playerNum == 1)
+        RealEngine::endGame("Player 1 wins! Press the reset button to play again.");
+    else if (playerNum == 2)
+        RealEngine::endGame("Player 2 wins! Press the reset button to play again.");
+    else
+        RealEngine::endGame("We have a serious problem..");
+
+
+}
+
+

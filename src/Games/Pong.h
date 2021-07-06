@@ -11,7 +11,9 @@ public:
     void mainLoop() override;
 
     //set ball, launch it with random velocity
-    void resetGame();
+    static void resetGame();
+
+    static void finishGame(int playerNum);
 
 
 };

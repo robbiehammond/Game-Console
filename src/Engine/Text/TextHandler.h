@@ -3,9 +3,10 @@
 #include "Text.h"
 #include "Engine/Exception/ExceptionHandler.h"
 
+//TODO: 2 or more digit numbers aren't properly rendered
 class TextHandler {
 private:
-    static const int MAXTEXT = 500;
+    static const int MAXTEXT = 10;
     static Text* textList[MAXTEXT];
     static Adafruit_ST7735* screen;
     static int textListPtr;
