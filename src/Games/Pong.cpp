@@ -45,9 +45,6 @@ void Pong::onStart() {
 }
 
 void Pong::mainLoop() {
-    Serial.println(player1Score);
-    Serial.println(player2Score);
-    Serial.println();
     RealEngine::update(entities, backgroundObjects, MAX_ENTITIES, MAX_TERRAIN);
 
     if (IOHandler::leftPressed())
@@ -59,8 +56,15 @@ void Pong::mainLoop() {
     if (IOHandler::rightPressed())
         PhysicsHandler::moveDown(rightPlayer);
 
-    if (PhysicsHandler::detectCollision(leftPlayer, ball) || PhysicsHandler::detectCollision(rightPlayer, ball))
+    if (PhysicsHandler::detectCollision(leftPlayer, ball)) {
         PhysicsHandler::reverseHorizontalVelocity(ball);
+        PhysicsHandler::transferMomentumFrom(leftPlayer, ball);
+    }
+
+    if (PhysicsHandler::detectCollision(rightPlayer, ball)) {
+        PhysicsHandler::reverseHorizontalVelocity(ball);
+        PhysicsHandler::transferMomentumFrom(rightPlayer, ball);
+    }
     if (PhysicsHandler::detectCollision(ball, TOPEDGE) || PhysicsHandler::detectCollision(ball, BOTTOMEDGE))
         PhysicsHandler::reverseVerticalVelocity(ball);
 
@@ -90,11 +94,11 @@ void Pong::resetGame() {
     ball->setOriginPos(center);
     int xVel = random(-2, 2);
     if (xVel == 0) xVel = 1; //if 0, game is unplayable
-
     int yVel = random(-2, 2);
+
     ball->setDefaultMovingVelocity(xVel, yVel);
     ball->setCurVelocity(xVel, yVel);
-    //Serial.println(ball->getDefaultVelocity());
+
 }
 
 void Pong::finishGame(int playerNum) {
@@ -103,7 +107,7 @@ void Pong::finishGame(int playerNum) {
     else if (playerNum == 2)
         RealEngine::endGame("Player 2 wins! Press the reset button to play again.");
     else
-        RealEngine::endGame("We have a serious problem..");
+        RealEngine::endGame("We have a serious problem... Not too sure how we got here.");
 
 
 }

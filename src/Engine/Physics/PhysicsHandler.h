@@ -29,6 +29,7 @@ public:
 
     static void reverseHorizontalVelocity(Entity* obj);
     static void reverseVerticalVelocity(Entity* obj);
+    static void transferMomentumFrom(Entity* obj1, Entity* obj2);
     static void reverseVelocity(Entity* obj);
 
     static void moveLeft(Entity* obj);

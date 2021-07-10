@@ -197,3 +197,10 @@ bool PhysicsHandler::detectCollision(Entity *obj, ScreenEdge edge) {
     }
 
 }
+
+//Nothing at all technical here
+void PhysicsHandler::transferMomentumFrom(Entity *obj1, Entity *obj2) {
+    Vec2D velSrc = obj1->getCurVelocity();
+    obj2->setCurVelocity((.5 * velSrc.x) + obj2->getCurVelocity().x, (.5 * velSrc.y) + obj2->getCurVelocity().y);
+
+}

@@ -10,7 +10,8 @@
 #define TFT_DC         8
 
 /*
- * TODO: Get Text working. Easy to move, place, and update. Can be updated through public interface.
+ * TODO: Get Multi-char text working.
+ *       Clean up code hardcore.
  */
 
 /*
