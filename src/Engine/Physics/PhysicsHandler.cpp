@@ -28,7 +28,7 @@ void PhysicsHandler::reset(Entity **objects, int len) {
 
 void PhysicsHandler::initialize(Adafruit_ST7735 *s, int stageWidth) {
     screen = s;
-    screenHeight = screen->height();
+    screenHeight = screen->height() - 10;
 
     //default to stage being screen size if stageWidth left blank
     if (stageWidth == 0)
@@ -185,9 +185,9 @@ void PhysicsHandler::reverseVerticalVelocity(Entity *obj) {
 bool PhysicsHandler::detectCollision(Entity *obj, ScreenEdge edge) {
     switch (edge) {
         case TOPEDGE:
-            return obj->getAbsoluteTop() == 0;
+            return obj->getAbsoluteTop() == 10;
         case BOTTOMEDGE:
-            return obj->getAbsoluteBottom() == screenHeight;
+            return obj->getAbsoluteBottom() == screenHeight - 10;
         case LEFTEDGE:
             return obj->getAbsoluteLeft() == 0;
         case RIGHTEDGE:

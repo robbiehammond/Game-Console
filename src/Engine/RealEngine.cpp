@@ -8,6 +8,8 @@ void RealEngine::update(Entity **objects, SObject **terrian, int lenObjects, int
     //show text
     TextHandler::update();
 
+    RenderHandler::renderStageBoundaries();
+
     //loop through static objects
     for (int i = 0; i < lenTerrain && terrian[i] != nullptr; i++) {
         RenderHandler::renderStaticObjects(terrian[i]);

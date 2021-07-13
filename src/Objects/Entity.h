@@ -82,14 +82,16 @@ public:
 
     void setCurVelocity(Vec2D vel);
 
+
+
 protected:
     int generalWidth;
     int generalHeight; //for simple collision detection
     void enableControllable() { controlled = true; };
     void disableControllable() { controlled = false; };
-    bool controllable() const { return controlled; };
-    Vec2D defaultVelocity = Vec2D(1,1);
 
+    Vec2D defaultVelocity = Vec2D(1,1);
+    bool affectedByGravity = true;
     bool enemy = false;
     bool controlled = false;
     bool OOBTop, OOBBottom, OOBRight, OOBLeft; //OOB = out of bounds

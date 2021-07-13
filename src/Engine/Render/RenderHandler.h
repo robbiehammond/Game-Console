@@ -12,13 +12,15 @@ public:
     static void reset(Entity* objects[], int len);
     static void flush();
     Adafruit_ST7735* getScreen() { return screen; }
+    static void renderStageBoundaries();
 
 private:
     RenderHandler() {};
     static void render(Entity* e);
     static bool onDisplay(Entity* e);
-    static void followPlayer(Entity* e);
+    static void followPlayer(Entity* e, int extraBuffer = 30);
     static bool viewHitStageBoundary();
+
 
 
     static Adafruit_ST7735* screen;

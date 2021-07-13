@@ -10,7 +10,7 @@ int RenderHandler::stageSize = 0;
 Vec2D RenderHandler::playerCoords;
 Vec2D RenderHandler::playerVelocity;
 
-static int extraBuffer = 30; //temporary hack for the time being
+
 
 void RenderHandler::initialize(Adafruit_ST7735 *s, int StageWidth) {
     screen = s;
@@ -60,7 +60,7 @@ bool RenderHandler::onDisplay(Entity *e) {
 /*TODO: make a field in entity which depicts the r and l extremes of an object, so the scrolling can
  * be based on how close the edge is to the side of the screen, rather than the center.
  */
-void RenderHandler::followPlayer(Entity* e) {
+void RenderHandler::followPlayer(Entity* e, int extraBuffer) {
     //Serial.println(e->getOriginPos().x);
 
     int xSpeed = playerVelocity.x;
@@ -92,6 +92,11 @@ bool RenderHandler::viewHitStageBoundary() {
 
 void RenderHandler::flush() {
     screen->fillScreen(ST77XX_BLACK);
+}
+
+void RenderHandler::renderStageBoundaries() {
+    screen->drawRect(0, 10, screenWidth, 1, ST7735_WHITE);
+    screen->drawRect(0, screenHeight - 10, screenWidth, 1, ST7735_WHITE);
 }
 
 
