@@ -11,7 +11,6 @@
 
 /*
  * TODO: Get Multi-char text working.
- *       Clean up code hardcore.
  */
 
 /*
