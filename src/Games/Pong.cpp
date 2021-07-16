@@ -103,9 +103,9 @@ void Pong::resetGame() {
 
 void Pong::finishGame(int playerNum) {
     if (playerNum == 1)
-        RealEngine::endGame("Player 1 wins! \n Press the reset button to play again.");
+        RealEngine::endGame("Player 1 wins! \nPress the reset\nbutton to play again.");
     else if (playerNum == 2)
-        RealEngine::endGame("Player 2 wins!\n Press the reset button to play again.");
+        RealEngine::endGame("Player 2 wins!\nPress the reset\nbutton to play again.");
     else
         RealEngine::endGame("We have a serious problem...\n Not too sure how we got here.");
 

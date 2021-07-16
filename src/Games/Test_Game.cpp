@@ -24,7 +24,7 @@ void Test_Game::onStart() {
     Rect* r = new Rect(ST7735_GREEN, 10, 10);
 
     //software setup
-    RealEngine::initialize(&tft, 180, FALLING_PHYSICS);
+    RealEngine::initialize(&tft, 180, FALLING_PHYSICS,false);
 
     PhysicsHandler::toggleBouncyWalls = true;
     PhysicsHandler::shouldTrackPlayer = true;

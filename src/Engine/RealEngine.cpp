@@ -1,6 +1,7 @@
 #include "RealEngine.h"
 GameType RealEngine::t;
 Adafruit_ST7735* RealEngine::screen;
+bool RealEngine::shouldRenderBoundaries;
 
 void RealEngine::update(Entity **objects, SObject **terrian, int lenObjects, int lenTerrain) {
     RenderHandler::flush();
@@ -8,7 +9,8 @@ void RealEngine::update(Entity **objects, SObject **terrian, int lenObjects, int
     //show text
     TextHandler::update();
 
-    RenderHandler::renderStageBoundaries();
+    if (shouldRenderBoundaries)
+        RenderHandler::renderStageBoundaries();
 
     //loop through static objects
     for (int i = 0; i < lenTerrain && terrian[i] != nullptr; i++) {
@@ -28,7 +30,7 @@ void RealEngine::update(Entity **objects, SObject **terrian, int lenObjects, int
 
 
 //as of now, leftLocation = 5, right = 2, up = 9, down = 7, a = 0, b = 1;
-void RealEngine::initialize(Adafruit_ST7735 *s, int stageWidth, GameType type) {
+void RealEngine::initialize(Adafruit_ST7735 *s, int stageWidth, GameType type, bool renderBoundaries) {
     screen = s;
     if (stageWidth < 128)
         ExceptionHandler::throwException(TOO_SMALL_SCREEN, "Screen must have width of at least 128.");
@@ -40,6 +42,7 @@ void RealEngine::initialize(Adafruit_ST7735 *s, int stageWidth, GameType type) {
     IOHandler::initialize(A4, A3, A5, A2, 0, 1, 0);
     ExceptionHandler::initialize(s);
     TextHandler::initialize(s);
+    shouldRenderBoundaries = renderBoundaries;
 }
 
 [[noreturn]] void RealEngine::endGame(char *text) {

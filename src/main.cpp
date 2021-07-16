@@ -2,8 +2,8 @@
 #include "Objects/Rect.h"
 #include "Objects/Triangle.h"
 #include "Engine/RealEngine.h"
-#include "Games/Game.h"
 #include "Games/Pong.h"
+#include <Games/Test_Game.h>
 
 #define TFT_CS        10
 #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
@@ -22,7 +22,7 @@
  *
  */
 
-Pong game;
+Test_Game game;
 
 void setup(void) {
     //hardware setup
